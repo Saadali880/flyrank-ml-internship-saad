@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Pathbuilder & Claude Project Simulator · Week 1 · FlyRank AI</title>
+  <meta name="description" content="An interactive tool to design your portfolio sitemap, simulate the Claude Project interview and pressure-test, and prepare your Week 1 deliverables.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="inner-header">
+      <div class="logo-area">
+        <svg class="flyrank-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#10B981" />
+          <path d="M2 17L12 22L22 17" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M2 12L12 17L22 12" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="logo-text">FlyRank <span class="accent">AI</span></span>
+      </div>
+      <div class="tagline">Week 1: Draw the Path</div>
+    </div>
+  </header>
+
+  <!-- App Container -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="nav-group">
+        <div class="nav-group-title">The Path</div>
+        <button class="nav-item active" id="nav-btn-track" data-target="view-track">
+          <span class="step-num">1</span> Select Track
+        </button>
+        <button class="nav-item" id="nav-btn-interview" data-target="view-interview">
+          <span class="step-num">2</span> Narrowing Interview
+        </button>
+        <button class="nav-item" id="nav-btn-sitemap" data-target="view-sitemap">
+          <span class="step-num">3</span> Draw Sitemap
+        </button>
+        <button class="nav-item" id="nav-btn-claude" data-target="view-claude">
+          <span class="step-num">4</span> Claude Simulator
+        </button>
+        <button class="nav-item" id="nav-btn-deliver" data-target="view-deliver">
+          <span class="step-num">5</span> Deliverables
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="progress-card">
+          <div class="progress-title">Completion</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="overall-progress" style="width: 20%"></div>
+          </div>
+          <div class="progress-text" id="progress-percent-text">20% Complete</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main View Content -->
+    <main class="main-content" id="main-content-panel">
+      
+      <!-- STEP 1: SELECT TRACK -->
+      <section class="view-panel active" id="view-track">
+        <div class="panel-header">
+          <span class="eyebrow">Step 1 of 5</span>
+          <h1>Select Your Portfolio Track</h1>
+          <p class="lead">Pick the career track that represents your background or the skill set you want to build and prove in this internship. This will pre-configure the AI models and prompts.</p>
+        </div>
+
+        <div class="grid-cards">
+          <!-- Card 1: Dev/SEO/Ops -->
+          <div class="track-card" id="track-card-dev" onclick="selectTrack('dev')">
+            <div class="track-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <div class="track-title">Dev / SEO / Ops</div>
+            <div class="track-desc">Prove you can build functional tools, deploy clean code to production, and solve mechanical engineering/operational challenges.</div>
+            <div class="track-example"><b>Iris's Equivalent:</b> "I take a rough idea to a working tool in production, for a small team that needs to ship, not plan."</div>
+          </div>
+
+          <!-- Card 2: UI/UX -->
+          <div class="track-card" id="track-card-design" onclick="selectTrack('design')">
+            <div class="track-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path><path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"></path></svg>
+            </div>
+            <div class="track-title">UI / UX Designer</div>
+            <div class="track-desc">Prove you can turn complex user flows, confusing navigation, or messy interfaces into clean, intuitive, and high-fidelity mockups.</div>
+            <div class="track-example"><b>Iris's Equivalent:</b> "I turn confusing flows into simple, usable screens, for a hiring manager at a small product team."</div>
+          </div>
+
+          <!-- Card 3: Machine Learning -->
+          <div class="track-card" id="track-card-ml" onclick="selectTrack('ml')">
+            <div class="track-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </div>
+            <div class="track-title">Machine Learning</div>
+            <div class="track-desc">Prove you can handle messy data, build or evaluate models, and explain their core constraints and limits honestly.</div>
+            <div class="track-example"><b>Iris's Equivalent:</b> "I build models that work on messy real data and am honest about their limits, for a lead who needs a prototype."</div>
+          </div>
+
+          <!-- Card 4: Marketing -->
+          <div class="track-card" id="track-card-marketing" onclick="selectTrack('marketing')">
+            <div class="track-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            </div>
+            <div class="track-title">Growth Marketing</div>
+            <div class="track-desc">Prove you can move a traffic or sign-up metric, test acquisition funnels, and demonstrate before/after metrics of campaign growth.</div>
+            <div class="track-example"><b>Iris's Equivalent:</b> "I grow organic traffic and can show the before and after, for a founder who wants more of the right visitors."</div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn btn-primary" id="btn-to-step2" disabled onclick="navigateTo('view-interview')">Proceed to Narrowing Interview &rarr;</button>
+        </div>
+      </section>
+
+      <!-- STEP 2: NARROWING INTERVIEW -->
+      <section class="view-panel" id="view-interview">
+        <div class="panel-header">
+          <span class="eyebrow">Step 2 of 5</span>
+          <h1>The Narrowing Interview</h1>
+          <p class="lead">The core exercise is using AI as an interviewer, not an author. Chat with our simulated AI coach to formulate your unique <b>Proof Statement</b>: One Claim, One Person, One Action, and one honest line on why it needs to exist.</p>
+        </div>
+
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="chat-agent-info">
+              <div class="agent-avatar">AI</div>
+              <div>
+                <div class="agent-name">AI Mentor</div>
+                <div class="agent-status">Narrowing Interviewer</div>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline-danger" onclick="resetInterview()">Reset Chat</button>
+          </div>
+          
+          <div class="chat-messages" id="chat-messages-box">
+            <!-- Dynamically populated by JS -->
+          </div>
+
+          <div class="chat-suggestions" id="chat-suggestions-container">
+            <!-- Dynamic button quick replies -->
+          </div>
+
+          <div class="chat-input-area">
+            <input type="text" id="chat-input-text" placeholder="Type your answer here..." onkeydown="if(event.key === 'Enter') sendUserMessage()">
+            <button class="btn btn-primary btn-icon" id="btn-send-message" onclick="sendUserMessage()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Resulting Proof Statement Display -->
+        <div class="proof-card-box hidden" id="proof-statement-result-box">
+          <div class="proof-card-header">
+            <span class="proof-badge">Active Proof Statement</span>
+            <button class="btn btn-sm btn-outline" onclick="editProofStatement()">Edit Text</button>
+          </div>
+          <div class="proof-statement-text" id="display-proof-statement">
+            <!-- Populated on approval -->
+          </div>
+          <div class="voice-card-text" id="display-voice-card">
+            <!-- Voice card summary -->
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn btn-secondary" onclick="navigateTo('view-track')">&larr; Back to Tracks</button>
+          <button class="btn btn-primary" id="btn-to-step3" disabled onclick="navigateTo('view-sitemap')">Draw Your Sitemap &rarr;</button>
+        </div>
+      </section>
+
+      <!-- STEP 3: DRAW PORTFOLIO SITEMAP -->
+      <section class="view-panel" id="view-sitemap">
+        <div class="panel-header">
+          <span class="eyebrow">Step 3 of 5</span>
+          <h1>Sketch Your Portfolio Sitemap</h1>
+          <p class="lead">Draw the sitemap. It should take the absolute minimum number of pages (usually 3 or 4) to walk your visitor from landing to the one action. Every page must earn its place against your claim.</p>
+        </div>
+
+        <div class="proof-summary-bar">
+          <strong>Proof Goal:</strong> <span id="sitemap-goal-summary">"Complete step 2 to display your proof statement here."</span>
+        </div>
+
+        <div class="sitemap-builder-workspace">
+          <!-- Sidebar: Page Tool & Rules -->
+          <div class="sitemap-sidebar">
+            <div class="sb-section">
+              <h3>Sitemap Rules</h3>
+              <ul class="rules-list">
+                <li id="rule-size" class="rule-item invalid">Small and focused (3-4 pages max)</li>
+                <li id="rule-landing" class="rule-item invalid">Landing page makes the clear claim</li>
+                <li id="rule-proof" class="rule-item invalid">Contains at least 1 case study/work proof</li>
+                <li id="rule-cta" class="rule-item invalid">Contains contact/action page containing the CTA</li>
+              </ul>
+            </div>
+
+            <div class="sb-section">
+              <h3>Add Page</h3>
+              <div class="form-group">
+                <label for="page-name-input">Page Name</label>
+                <input type="text" id="page-name-input" placeholder="e.g., Case Study: Model Evaluation">
+              </div>
+              <div class="form-group">
+                <label for="page-role-select">Page Role / Purpose</label>
+                <select id="page-role-select">
+                  <option value="landing">Landing &amp; Claim (Hero)</option>
+                  <option value="proof">Work &amp; Case Study (Proof)</option>
+                  <option value="bio">About &amp; Experience (Bio)</option>
+                  <option value="action">Contact &amp; CTA (Action)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="page-desc-input">Explain how it earns its place</label>
+                <textarea id="page-desc-input" placeholder="Why does this page need to exist? What does it prove?"></textarea>
+              </div>
+              <button class="btn btn-primary btn-block" onclick="addSitemapPage()">Add Page to Site Map</button>
+            </div>
+          </div>
+
+          <!-- Canvas / Layout visualizer -->
+          <div class="sitemap-canvas">
+            <div class="canvas-header">
+              <span class="canvas-title">Visual Sitemap Flow</span>
+              <button class="btn btn-sm btn-outline" onclick="exportSitemapSVG()">Export Sitemap SVG</button>
+            </div>
+            
+            <div class="canvas-viewport" id="sitemap-canvas-nodes">
+              <!-- Nodes populated dynamically by JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn btn-secondary" onclick="navigateTo('view-interview')">&larr; Back to Interview</button>
+          <button class="btn btn-primary" id="btn-to-step4" disabled onclick="navigateTo('view-claude')">Set up Claude Project &rarr;</button>
+        </div>
+      </section>
+
+      <!-- STEP 4: CLAUDE PROJECT SIMULATOR -->
+      <section class="view-panel" id="view-claude">
+        <div class="panel-header">
+          <span class="eyebrow">Step 4 of 5</span>
+          <h1>Claude Project Simulator &amp; Pressure-Test</h1>
+          <p class="lead">Simulate creating your Claude Project workspace. Feed your custom instructions to the AI tutor, paste in your sitemap, and run the <b>Pressure-Test prompt</b> to find what needs to change.</p>
+        </div>
+
+        <div class="simulator-layout">
+          <!-- Left: Config Settings Mockup -->
+          <div class="claude-config-mockup">
+            <div class="config-header">
+              <div class="claude-logo">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="claude-svg">
+                  <path d="M50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90Z" fill="#D97706" fill-opacity="0.1"/>
+                  <path d="M50 82C67.6731 82 82 67.6731 82 50C82 32.3269 67.6731 18 50 18C32.3269 18 18 32.3269 18 50C18 67.6731 32.3269 82 50 82Z" stroke="#D97706" stroke-width="4"/>
+                  <path d="M40 38C40 38 45 42 50 42C55 42 60 38 60 38" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+                  <circle cx="36" cy="50" r="4" fill="#D97706"/>
+                  <circle cx="64" cy="50" r="4" fill="#D97706"/>
+                </svg>
+              </div>
+              <div class="config-title-text">
+                <h3>Claude Project Settings</h3>
+                <span class="subtext">Configure custom instructions</span>
+              </div>
+            </div>
+
+            <div class="form-group mt-15">
+              <label for="project-name-input">Project Name</label>
+              <input type="text" id="project-name-input" value="Portfolio Build - Week 1" readonly class="input-disabled">
+            </div>
+
+            <div class="form-group">
+              <label for="custom-instructions-area">Custom Instructions (System Prompt)</label>
+              <div class="copy-container">
+                <textarea id="custom-instructions-area" rows="10" readonly class="textarea-disabled">Loading instructions...</textarea>
+                <button class="btn btn-sm btn-outline copy-btn-float" onclick="copyInstructions()">Copy Instructions</button>
+              </div>
+              <small class="helper-text">These instructions guide Claude to act as your tutor for the remaining weeks.</small>
+            </div>
+            
+            <div class="toolkit-checker">
+              <h4>Toolkit Verification Checklist</h4>
+              <label class="checkbox-container">
+                <input type="checkbox" id="chk-claude" onchange="updateToolkitProgress()"> Claude account configured
+                <span class="checkmark"></span>
+              </label>
+              <label class="checkbox-container">
+                <input type="checkbox" id="chk-chatgpt" onchange="updateToolkitProgress()"> ChatGPT account configured
+                <span class="checkmark"></span>
+              </label>
+              <label class="checkbox-container">
+                <input type="checkbox" id="chk-gemini" onchange="updateToolkitProgress()"> Gemini account configured
+                <span class="checkmark"></span>
+              </label>
+              <label class="checkbox-container">
+                <input type="checkbox" id="chk-perplexity" onchange="updateToolkitProgress()"> Perplexity account configured
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Right: Chat Mockup for Pressure Test -->
+          <div class="claude-chat-mockup">
+            <div class="chat-mockup-header">
+              <span class="project-title">Project: Portfolio Build - Week 1</span>
+              <span class="model-badge">Claude 3.5 Sonnet</span>
+            </div>
+
+            <div class="chat-mockup-messages" id="claude-simulator-messages">
+              <!-- Dynamically generated pressure-test chat logs -->
+            </div>
+
+            <div class="chat-mockup-input-box" id="claude-input-trigger-box">
+              <div class="prompt-hint-box">
+                <span class="hint-label">Run the Pressure-Test Prompt:</span>
+                <p class="hint-text">Let's send your proof statement and sitemap to Claude to review.</p>
+              </div>
+              <button class="btn btn-primary btn-block" id="btn-run-pressure-test" onclick="runPressureTest()">Run Pressure Test Prompt</button>
+            </div>
+
+            <!-- Notes card on what to change in the sitemap -->
+            <div class="change-notes-card hidden" id="change-notes-card-box">
+              <h3>What is at least one thing you will change?</h3>
+              <p class="subtext">Based on the pressure-test analysis, note down what changes you will make to your sitemap to ensure all pages earn their place.</p>
+              <textarea id="sitemap-change-note-input" rows="3" placeholder="e.g., I will remove the general 'Skills' page and merge my bio statement directly onto the landing page so every subpage proves a specific case." oninput="saveChangeNote()"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn btn-secondary" onclick="navigateTo('view-sitemap')">&larr; Back to Sitemap</button>
+          <button class="btn btn-primary" id="btn-to-step5" disabled onclick="navigateTo('view-deliver')">Go to Deliverables &rarr;</button>
+        </div>
+      </section>
+
+      <!-- STEP 5: DELIVERABLES HUB -->
+      <section class="view-panel" id="view-deliver">
+        <div class="panel-header">
+          <span class="eyebrow">Step 5 of 5</span>
+          <h1>Deliverables Summary</h1>
+          <p class="lead">Congratulations! You have completed the exercises for Week 1. Below are the files, text snippets, and checklists ready to post to your track thread.</p>
+        </div>
+
+        <div class="deliverables-grid">
+          
+          <!-- Checklist Card -->
+          <div class="deliverable-card">
+            <h3>Submission Checklist</h3>
+            <ul class="d-checklist">
+              <li class="chk-item" id="chk-item-statement">Proof Statement generated &amp; narrowed</li>
+              <li class="chk-item" id="chk-item-sitemap">Small Sitemap designed (3-4 pages)</li>
+              <li class="chk-item" id="chk-item-toolkit">Toolkit accounts set up (4 accounts verified)</li>
+              <li class="chk-item" id="chk-item-instructions">Claude Project custom instructions configured</li>
+              <li class="chk-item" id="chk-item-test">Sitemap pressure-tested by Claude</li>
+              <li class="chk-item" id="chk-item-note">At least one change noted</li>
+            </ul>
+          </div>
+
+          <!-- Compilation text area -->
+          <div class="deliverable-card card-large">
+            <div class="d-card-header">
+              <h3>Deliverable Text Post</h3>
+              <button class="btn btn-sm btn-outline" onclick="copyCompilationText()">Copy Entire Post</button>
+            </div>
+            
+            <div class="compilation-preview" id="compilation-post-text">
+              <!-- Rendered markdown copy paste block -->
+            </div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn btn-secondary" onclick="navigateTo('view-claude')">&larr; Back to Claude Simulator</button>
+          <button class="btn btn-success" onclick="finishProject()">Complete Task &amp; Export Artifacts</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
