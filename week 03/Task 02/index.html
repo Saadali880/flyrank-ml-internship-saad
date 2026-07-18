@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saad Ali — Visual Identity Kit · ML Portfolio</title>
+  <meta name="description" content="Official Visual Identity Kit for Saad's Machine Learning Portfolio. Featuring design tokens, color palette, custom monogram, Geist typography specimens, and style notes.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Toast Notification Box -->
+  <div id="toast-notification" class="toast-msg">Copied to clipboard!</div>
+
+  <!-- Hero Header -->
+  <header class="hero-header" id="main-header">
+    <div class="container header-content">
+      <div class="brand-info">
+        <div class="monogram" id="brand-monogram">[S]</div>
+        <div class="title-area">
+          <h1>Saad Ali</h1>
+          <p>Machine Learning Track · Visual Identity Kit</p>
+        </div>
+      </div>
+      <button class="theme-toggle-btn" id="global-theme-toggle" onclick="toggleGlobalTheme()">
+        <span id="theme-btn-icon">⚡</span> <span id="theme-btn-text">Dark Mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container" style="margin-top: 40px;">
+    
+    <!-- Introduction Summary -->
+    <section class="card" style="margin-bottom: 32px;" id="intro-card">
+      <h2 class="card-title">
+        The Portfolio Rule: The Frame, Not the Painting
+        <span class="card-subtitle">Saad's Design Principle</span>
+      </h2>
+      <p style="color: var(--text-secondary); font-size: 15px; max-width: 800px;">
+        As a Machine Learning Engineer, my work is about precision, empirical data, and transparency. 
+        This design serves as a quiet, confident frame. Rather than distracting the visitor with loud gradients or generated AI-slop graphics, the interface stays calm, letting the actual accuracy benchmarks, logs, and interactive model playgrounds be the loudest things on the page.
+      </p>
+    </section>
+
+    <!-- Column Showcase Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- COLOR PALETTE CARD -->
+      <section class="card" id="palette-card">
+        <h2 class="card-title">
+          Color Palette
+          <span class="card-subtitle">Click card to copy hex</span>
+        </h2>
+        
+        <div class="color-list">
+          
+          <!-- Color 1: Background -->
+          <div class="color-item" onclick="copyToClipboard('#F8FAFC', 'Background Hex')" id="color-bg">
+            <div class="color-swatch" style="background-color: #F8FAFC; border: 1px solid #e2e8f0;"></div>
+            <div class="color-info">
+              <div class="color-name">Near-White Background</div>
+              <div class="color-hex">#F8FAFC</div>
+            </div>
+            <span class="copy-badge">Copy</span>
+          </div>
+
+          <!-- Color 2: Near Black Text -->
+          <div class="color-item" onclick="copyToClipboard('#0F172A', 'Text Hex')" id="color-text">
+            <div class="color-swatch" style="background-color: #0F172A;"></div>
+            <div class="color-info">
+              <div class="color-name">Near-Black Text</div>
+              <div class="color-hex">#0F172A</div>
+            </div>
+            <span class="copy-badge">Copy</span>
+          </div>
+
+          <!-- Color 3: Secondary Slate -->
+          <div class="color-item" onclick="copyToClipboard('#334155', 'Secondary Hex')" id="color-secondary">
+            <div class="color-swatch" style="background-color: #334155;"></div>
+            <div class="color-info">
+              <div class="color-name">Secondary Brand Slate</div>
+              <div class="color-hex">#334155</div>
+            </div>
+            <span class="copy-badge">Copy</span>
+          </div>
+
+          <!-- Color 4: Teal Accent -->
+          <div class="color-item" onclick="copyToClipboard('#0D9488', 'Accent Hex')" id="color-accent">
+            <div class="color-swatch" style="background-color: #0D9488;"></div>
+            <div class="color-info">
+              <div class="color-name">Calm Teal Accent</div>
+              <div class="color-hex">#0D9488</div>
+            </div>
+            <span class="copy-badge">Copy</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TYPOGRAPHY SPECIMENS CARD -->
+      <section class="card" id="typography-card">
+        <h2 class="card-title">
+          Typography System
+          <span class="card-subtitle">Google Fonts Geist Pair</span>
+        </h2>
+        
+        <div class="specimen-group">
+          
+          <!-- Specimen 1: Headings -->
+          <div class="specimen" id="specimen-headings">
+            <div class="specimen-label">
+              <span>Heading Font</span>
+              <span class="specimen-font-details">Geist Mono (600 / 700)</span>
+            </div>
+            <h2 class="geist-mono-title">Saad Ali</h2>
+            <h3 class="geist-mono-title" style="font-size: 18px; margin-top: 8px; font-weight: 500;">
+              [Model Landing & Benchmarks]
+            </h3>
+          </div>
+
+          <!-- Specimen 2: Body -->
+          <div class="specimen" id="specimen-body">
+            <div class="specimen-label">
+              <span>Body Font</span>
+              <span class="specimen-font-details">Geist Sans (300 / 400 / 500)</span>
+            </div>
+            <p class="geist-body" style="font-weight: 400;">
+              I train and deploy machine learning models that prioritize messy search performance data. I help engineering leads build honest, latency-sensitive prototypes.
+            </p>
+          </div>
+
+          <!-- Specimen 3: Labels and Code -->
+          <div class="specimen" id="specimen-code">
+            <div class="specimen-label">
+              <span>Labels &amp; Code blocks</span>
+              <span class="specimen-font-details">Geist Mono (500)</span>
+            </div>
+            <div style="margin-top: 8px;">
+              <code class="geist-mono-code">accuracy_score: 0.9412</code>
+              <code class="geist-mono-code" style="margin-left: 8px;">latency: 14ms</code>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ACCESSIBILITY & CONTRAST WIDGET -->
+      <section class="accessibility-auditor" id="accessibility-card">
+        <h2 class="card-title">
+          WCAG Contrast Compliance
+          <span class="card-subtitle">Verified contrast metrics</span>
+        </h2>
+        
+        <div class="audit-grid">
+          <!-- Text on Background -->
+          <div class="audit-item" id="audit-text-bg">
+            <div class="audit-ratio">16.6:1 <span class="audit-ratio-lbl">ratio</span></div>
+            <div class="audit-label">Text on Background</div>
+            <div class="audit-desc">Slate 900 (#0F172A) on Slate 50 (#F8FAFC)</div>
+            <div class="badge-row">
+              <span class="pass-badge">AAA Pass</span>
+              <span class="pass-badge" style="background-color: #10b981;">WCAG AAA Compliant</span>
+            </div>
+          </div>
+
+          <!-- Accent on Background -->
+          <div class="audit-item" id="audit-accent-bg">
+            <div class="audit-ratio">4.8:1 <span class="audit-ratio-lbl">ratio</span></div>
+            <div class="audit-label">Accent on Background</div>
+            <div class="audit-desc">Teal 600 (#0D9488) on Slate 50 (#F8FAFC)</div>
+            <div class="badge-row">
+              <span class="pass-badge">AA Pass</span>
+              <span class="pass-badge" style="background-color: #059669;">AAA Large text</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LIVE PORTFOLIO SIMULATION SANDBOX -->
+      <section class="preview-sandbox" id="sandbox-card">
+        <div class="sandbox-container">
+          
+          <div class="sandbox-toolbar">
+            <div class="window-dots">
+              <div class="window-dot red"></div>
+              <div class="window-dot yellow"></div>
+              <div class="window-dot green"></div>
+              <span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--text-tertiary); margin-left: 8px;">
+                saad-portfolio-preview.html
+              </span>
+            </div>
+            
+            <div class="sandbox-controls">
+              <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 11px;" id="preview-theme-toggle" onclick="togglePreviewTheme()">
+                Toggle Preview Dark/Light
+              </button>
+            </div>
+          </div>
+
+          <!-- The simulated web page template -->
+          <div class="sandbox-canvas" id="portfolio-preview-canvas" data-preview-theme="light">
+            
+            <!-- Navbar -->
+            <nav class="simulated-nav">
+              <div class="simulated-logo">
+                <span>[S]</span>
+                <span style="font-size: 14px; font-weight: 600;">Saad Ali</span>
+              </div>
+              <div class="simulated-links">
+                <a href="#claim" onclick="return false;">Claim</a>
+                <a href="#benchmarks" onclick="return false;">Benchmarks</a>
+                <a href="#playground" onclick="return false;">Playground</a>
+                <a href="#contact" onclick="return false;">Contact</a>
+              </div>
+            </nav>
+
+            <!-- Hero Column -->
+            <div class="simulated-hero">
+              <span class="simulated-tag" id="simulated-tag-el">Machine Learning Prototype</span>
+              <h2>I build machine learning models that run on messy, real-world search data and am honest about their performance limits.</h2>
+              <p>Engineering leads don't trust black boxes. Here is a live, transparent playground showing exactly where this ranking system succeeds—and where it fails.</p>
+            </div>
+
+            <!-- Case Study Widget (accuracy benchmarks) -->
+            <div class="simulated-case-study">
+              <h3>
+                <span>Model Priority Benchmarks</span>
+                <span class="simulated-status-dot">● Latency: 14ms</span>
+              </h3>
+              <p style="font-size: 13px; margin-bottom: 15px;">Target accuracy curves computed on anonymized search query test datasets:</p>
+              
+              <div class="simulated-chart-container">
+                <div class="chart-legend">Recall Rate</div>
+                <div class="chart-bar" style="height: 40%;" data-val="40%"></div>
+                <div class="chart-bar" style="height: 65%;" data-val="65%"></div>
+                <div class="chart-bar" style="height: 82%;" data-val="82%"></div>
+                <div class="chart-bar accented" style="height: 94%;" data-val="94%"></div>
+              </div>
+              
+              <p style="font-size: 12px; color: #64748b; text-align: center;">
+                Prioritized ranking cuts false positives by <strong>18%</strong> compared to traditional index heuristics.
+              </p>
+            </div>
+
+            <div class="simulated-cta-row">
+              <button class="btn" style="padding: 10px 20px; font-size: 12px;" onclick="alert('API Key Form Triggered')">
+                Request Sandbox API Key &rarr;
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- STYLE NOTE CODE CARD -->
+      <section class="style-note-card" id="style-note-box">
+        <h2 class="card-title" style="margin-bottom: 20px;">
+          Workspace Style Note
+          <span class="card-subtitle">Paste into Claude Project instructions</span>
+        </h2>
+        
+        <div class="style-note-container">
+          <div class="style-note-content">
+            <h3>Style Note:</h3>
+            <p id="style-note-text">
+              Fonts: Geist Mono (headings) / Geist (body). Colors: #0F172A (text), #F8FAFC (bg), #0D9488 (accent). Mood: An analytical, precise, and hyper-focused frame that treats machine learning as a craft rather than magic.
+            </p>
+          </div>
+          <div class="style-note-action">
+            <button class="btn" onclick="copyStyleNote()" id="copy-note-btn">
+              Copy Style Note
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="showcase-footer">
+    <p>Saad Ali · Week 3 Task 2 · FlyRank AI Internship</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Copy to clipboard helper
+    function copyToClipboard(text, label) {
+      navigator.clipboard.writeText(text).then(function() {
+        showToast("Copied " + label + " to clipboard: " + text);
+      }, function(err) {
+        showToast("Failed to copy text: " + err);
+      });
+    }
+
+    // Show toast message
+    function showToast(message) {
+      const toast = document.getElementById("toast-notification");
+      toast.innerText = message;
+      toast.classList.add("show");
+      setTimeout(function() {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+
+    // Copy style note specifically
+    function copyStyleNote() {
+      const text = document.getElementById("style-note-text").innerText.trim();
+      navigator.clipboard.writeText(text).then(function() {
+        showToast("Copied Style Note to clipboard!");
+        
+        // Brief button indicator change
+        const btn = document.getElementById("copy-note-btn");
+        const originalText = btn.innerText;
+        btn.innerText = "Copied!";
+        btn.style.backgroundColor = "#10B981";
+        setTimeout(function() {
+          btn.innerText = originalText;
+          btn.style.backgroundColor = "";
+        }, 1500);
+      });
+    }
+
+    // Toggle global light/dark theme for the showcase page itself
+    function toggleGlobalTheme() {
+      const htmlEl = document.documentElement;
+      const themeText = document.getElementById("theme-btn-text");
+      const themeIcon = document.getElementById("theme-btn-icon");
+      
+      if (htmlEl.getAttribute("data-theme") === "light") {
+        htmlEl.setAttribute("data-theme", "dark");
+        themeText.innerText = "Light Mode";
+        themeIcon.innerText = "☀️";
+        showToast("Showcase switched to Dark Mode");
+      } else {
+        htmlEl.setAttribute("data-theme", "light");
+        themeText.innerText = "Dark Mode";
+        themeIcon.innerText = "⚡";
+        showToast("Showcase switched to Light Mode");
+      }
+    }
+
+    // Toggle simulated preview container theme (independently)
+    function togglePreviewTheme() {
+      const previewEl = document.getElementById("portfolio-preview-canvas");
+      const current = previewEl.getAttribute("data-preview-theme");
+      
+      if (current === "light") {
+        previewEl.setAttribute("data-preview-theme", "dark");
+        showToast("Simulated Portfolio preview toggled to Dark");
+      } else {
+        previewEl.setAttribute("data-preview-theme", "light");
+        showToast("Simulated Portfolio preview toggled to Light");
+      }
+    }
+  </script>
+</body>
+</html>

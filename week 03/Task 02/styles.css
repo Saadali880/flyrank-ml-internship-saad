@@ -1,0 +1,781 @@
+/* Import Geist and Geist Mono from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Light Mode (Default) */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --accent: #0d9488;
+  --accent-hover: #0f766e;
+  --accent-light: #e6f4f1;
+  --accent-text: #ffffff;
+  --border-color: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 8px -1px rgba(15, 23, 42, 0.03);
+  --header-bg: #0f172a;
+  --header-text: #f8fafc;
+  --monogram-bg: #1e293b;
+  --monogram-border: #334155;
+  --code-bg: #f1f5f9;
+  --code-text: #0f172a;
+  
+  /* Animations */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+[data-theme="dark"] {
+  /* Dark Mode */
+  --bg-primary: #090d16;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --accent: #0d9488;
+  --accent-hover: #14b8a6;
+  --accent-light: #115e59;
+  --accent-text: #ffffff;
+  --border-color: #1e293b;
+  --border-hover: #334155;
+  --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3), 0 2px 8px -1px rgba(0, 0, 0, 0.2);
+  --header-bg: #090d16;
+  --header-text: #f8fafc;
+  --monogram-bg: #1e293b;
+  --monogram-border: #0d9488;
+  --code-bg: #0f172a;
+  --code-text: #38bdf8;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  padding-bottom: 80px;
+}
+
+/* Layout Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header Section */
+header.hero-header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  padding: 60px 0;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--transition-normal);
+}
+
+header.hero-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+
+.brand-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Monogram Logo */
+.monogram {
+  font-family: 'Geist Mono', monospace;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  background-color: var(--monogram-bg);
+  border: 2px solid var(--monogram-border);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.1);
+  transition: all var(--transition-normal);
+  user-select: none;
+}
+
+.monogram:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.2);
+}
+
+.title-area h1 {
+  font-family: 'Geist Mono', monospace;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.title-area p {
+  color: var(--text-tertiary);
+  font-size: 14px;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(248, 250, 252, 0.2);
+  color: var(--header-text);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+  background-color: rgba(248, 250, 252, 0.1);
+  border-color: rgba(248, 250, 252, 0.4);
+}
+
+/* Dashboard Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 32px;
+  margin-top: 40px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards styling */
+.card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--card-shadow);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+}
+
+.card-title {
+  font-family: 'Geist Mono', monospace;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-subtitle {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-weight: normal;
+}
+
+/* Palette section */
+.color-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.color-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--bg-tertiary);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+}
+
+.color-item:hover {
+  transform: translateX(4px);
+  border-color: var(--accent);
+}
+
+.color-swatch {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+}
+
+.color-info {
+  flex-grow: 1;
+}
+
+.color-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.color-hex {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.copy-badge {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  background-color: var(--accent-light);
+  color: var(--accent);
+  padding: 2px 6px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.color-item:hover .copy-badge {
+  opacity: 1;
+}
+
+.toast-msg {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--text-primary);
+  color: var(--bg-secondary);
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.toast-msg.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Typography Specimens */
+.specimen-group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.specimen {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
+}
+
+.specimen:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.specimen-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.specimen-font-details {
+  color: var(--accent);
+}
+
+.specimen h2.geist-mono-title {
+  font-family: 'Geist Mono', monospace;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.specimen p.geist-body {
+  font-family: 'Geist', sans-serif;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.specimen code.geist-mono-code {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  background-color: var(--bg-tertiary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+/* Style Note Section */
+.style-note-card {
+  margin-top: 32px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--card-shadow);
+  grid-column: 1 / -1;
+}
+
+.style-note-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .style-note-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.style-note-content {
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+}
+
+.style-note-content h3 {
+  font-family: 'Geist Mono', monospace;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.style-note-content p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.style-note-action {
+  text-align: right;
+}
+
+.btn {
+  background-color: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Geist Mono', monospace;
+  font-weight: 500;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.15);
+}
+
+.btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-hover);
+  box-shadow: none;
+  transform: none;
+}
+
+/* Portfolio Sandbox / Previewer */
+.preview-sandbox {
+  margin-top: 32px;
+  grid-column: 1 / -1;
+}
+
+.sandbox-container {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.sandbox-toolbar {
+  background-color: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sandbox-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.window-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.window-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #cbd5e1;
+}
+
+.window-dot.red { background-color: #ef4444; }
+.window-dot.yellow { background-color: #f59e0b; }
+.window-dot.green { background-color: #10b981; }
+
+.sandbox-canvas {
+  padding: 40px;
+  background-color: #f8fafc;
+  color: #0f172a;
+  min-height: 400px;
+  transition: all var(--transition-normal);
+}
+
+/* Preview Light/Dark States */
+.sandbox-canvas[data-preview-theme="dark"] {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+/* Simulated Portfolio Page Elements inside Sandbox */
+.simulated-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.simulated-logo {
+  font-family: 'Geist Mono', monospace;
+  font-weight: 700;
+  font-size: 18px;
+  color: #0d9488;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.simulated-links {
+  display: flex;
+  gap: 24px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  color: #475569;
+}
+
+.sandbox-canvas[data-preview-theme="dark"] .simulated-links {
+  color: #94a3b8;
+}
+
+.simulated-links a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.simulated-links a:hover {
+  color: #0d9488;
+}
+
+/* Simulated Hero */
+.simulated-hero {
+  max-width: 680px;
+  margin: 0 auto 60px auto;
+  text-align: center;
+}
+
+.simulated-tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: #0d9488;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: inline-block;
+  background-color: #e6f4f1;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.sandbox-canvas[data-preview-theme="dark"] .simulated-tag {
+  background-color: #115e59;
+  color: #ffffff;
+}
+
+.simulated-hero h2 {
+  font-family: 'Geist Mono', monospace;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.simulated-hero p {
+  font-family: 'Geist', sans-serif;
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.sandbox-canvas[data-preview-theme="dark"] .simulated-hero p {
+  color: #94a3b8;
+}
+
+/* Simulated Content Card (Case study block) */
+.simulated-case-study {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(15,23,42,0.03);
+  transition: all var(--transition-normal);
+}
+
+.sandbox-canvas[data-preview-theme="dark"] .simulated-case-study {
+  background-color: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.simulated-case-study h3 {
+  font-family: 'Geist Mono', monospace;
+  font-size: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.simulated-status-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  color: #0d9488;
+  background-color: #e6f4f1;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.sandbox-canvas[data-preview-theme="dark"] .simulated-status-dot {
+  background-color: #115e59;
+  color: #ffffff;
+}
+
+.simulated-chart-container {
+  margin: 20px 0;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sandbox-canvas[data-preview-theme="dark"] .simulated-chart-container {
+  background-color: #0f172a;
+  border-color: #475569;
+}
+
+.chart-bar {
+  width: 24px;
+  background-color: #64748b;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.6s ease;
+  position: relative;
+}
+
+.chart-bar.accented {
+  background-color: #0d9488;
+}
+
+.chart-bar::before {
+  content: attr(data-val);
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Geist Mono', monospace;
+  font-size: 9px;
+  color: inherit;
+}
+
+.chart-legend {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  color: #64748b;
+}
+
+.simulated-case-study p {
+  font-size: 14px;
+  color: #475569;
+}
+
+.sandbox-canvas[data-preview-theme="dark"] .simulated-case-study p {
+  color: #94a3b8;
+}
+
+.simulated-cta-row {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Accessibility Auditor section */
+.accessibility-auditor {
+  margin-top: 32px;
+  grid-column: 1 / -1;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--card-shadow);
+}
+
+.audit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.audit-item {
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--bg-tertiary);
+  transition: transform var(--transition-fast);
+}
+
+.audit-item:hover {
+  transform: translateY(-2px);
+}
+
+.audit-ratio {
+  font-family: 'Geist Mono', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.audit-ratio-lbl {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-weight: normal;
+}
+
+.audit-label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.audit-desc {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+}
+
+.badge-row {
+  display: flex;
+  gap: 8px;
+}
+
+.pass-badge {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  background-color: #10b981;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Footer style */
+footer.showcase-footer {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--text-tertiary);
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  border-top: 1px solid var(--border-color);
+  margin-top: 60px;
+}
