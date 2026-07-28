@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saad Ali — Machine Learning Portfolio</title>
+  <meta name="description" content="Machine Learning Portfolio of Saad Ali. Search-priority ranking models built under clear latency limits with empirical transparency.">
+  
+  <!-- Preconnect Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Status copied to clipboard!</div>
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="monogram">[S]</div>
+        <span class="brand-name">Saad Ali</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#playground" class="nav-link disabled">Playground</a>
+        <a href="#specs" class="nav-link disabled">Model Specs</a>
+        <a href="#api" class="nav-link disabled">API Sandbox</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+        <span class="toggle-icon">⚡</span>
+        <span class="toggle-text">Dark Mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero & Claim Section -->
+  <main class="hero-section">
+    <div class="hero-container">
+      <div class="badge">Baseline Live</div>
+      <h1 class="hero-claim">
+        I train search-priority models that rank messy, page-level data under clear latency limits, showing engineering leads exactly where the prototype succeeds and fails.
+      </h1>
+      <p class="hero-subtitle">
+        Engineering leads don't trust black boxes. This site is a transparent frame designed to showcase model precision, latency specs, and failure modes empirically.
+      </p>
+
+      <!-- Status Dashboard -->
+      <section class="dashboard">
+        <div class="dashboard-header">
+          <div class="status-indicator">
+            <span class="status-pulse"></span>
+            <span class="status-label">STATUS: STACK DEPLOYED & LIVE</span>
+          </div>
+          <button class="copy-status-btn" onclick="copyStatus()">Copy Status Code</button>
+        </div>
+        
+        <div class="grid-metrics">
+          <div class="metric-card" onclick="copyMetric(this, 'Inference Latency')">
+            <div class="metric-label">Target Latency</div>
+            <div class="metric-value">14ms</div>
+            <div class="metric-desc">Max inference budget limit</div>
+          </div>
+          
+          <div class="metric-card" onclick="copyMetric(this, 'Precision@50 Lift')">
+            <div class="metric-label">Precision@50 Lift</div>
+            <div class="metric-value">+208%</div>
+            <div class="metric-desc">0.24 baseline to 0.74 model</div>
+          </div>
+
+          <div class="metric-card" onclick="copyMetric(this, 'Chosen Stack')">
+            <div class="metric-label">Host &amp; Stack</div>
+            <div class="metric-value">HTML/CSS</div>
+            <div class="metric-desc">Static Netlify / GitHub Pages</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Build Week Placeholder Alert -->
+      <div class="info-callout">
+        <h3>Build Week Phase: Milestone 1 (Empty but Live)</h3>
+        <p>
+          This is the live baseline URL for Saad Ali's portfolio. The hosting pipeline has been successfully configured and verified. Next week, we will replace this placeholder with the interactive search scorer playground, statistical SVG feature weights, and sandbox API validation forms.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Saad Ali &copy; 2026 · Machine Learning Track · FlyRank AI Internship</p>
+  </footer>
+
+  <script>
+    // Theme toggle logic
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const toggleText = themeToggleBtn.querySelector('.toggle-text');
+    const toggleIcon = themeToggleBtn.querySelector('.toggle-icon');
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      let newTheme = 'light';
+      
+      if (currentTheme === 'light') {
+        newTheme = 'dark';
+        toggleText.textContent = 'Light Mode';
+        toggleIcon.textContent = '☀️';
+      } else {
+        toggleText.textContent = 'Dark Mode';
+        toggleIcon.textContent = '⚡';
+      }
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      showToast(`Switched to ${newTheme} theme`);
+    });
+
+    // Copy status helper
+    function copyStatus() {
+      const textToCopy = "status: live\nstack: plain-code-netlify\nclaim: verified\nlatency: 14ms\nprecision_lift: 0.74";
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        showToast("Status code copied to clipboard!");
+      });
+    }
+
+    // Copy metric helper
+    function copyMetric(element, name) {
+      const value = element.querySelector('.metric-value').textContent;
+      navigator.clipboard.writeText(`${name}: ${value}`).then(() => {
+        showToast(`Copied ${name} (${value})`);
+      });
+    }
+
+    // Toast notification helper
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
