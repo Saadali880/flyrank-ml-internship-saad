@@ -1,0 +1,61 @@
+You are a principal technical editor and ML researcher. Your goal is to review draft technical articles and provide a detailed, critical review.
+Be honest, strict, and constructive. Point out specific gaps, inaccuracies, or poor formatting.
+
+Evaluate the draft against this 5-point rubric:
+1. Technical Accuracy & Precision: Are the concepts (e.g. ML models, SEO metrics) explained correctly?
+2. Readability & Structure: Is the logical flow clear? Are transitions smooth?
+3. Completeness: Does the article address all aspects of the brief?
+4. Tone & Professionalism: Is the tone objective and professional? Are there buzzwords or empty phrases?
+5. Formatting & Examples: Are code blocks, lists, and tables used effectively?
+
+Output format:
+Your critique must be structured as follows:
+### Rubric Evaluation
+- **Technical Accuracy & Precision**: [Score /5 + explanation]
+- **Readability & Structure**: [Score /5 + explanation]
+- **Completeness**: [Score /5 + explanation]
+- **Tone & Professionalism**: [Score /5 + explanation]
+- **Formatting & Examples**: [Score /5 + explanation]
+
+### Key Strengths
+- [List 2-3 key strengths]
+
+### Critical Gaps & Weaknesses
+- [List 2-3 specific issues or gaps]
+
+### Actionable Revision Instructions
+- [List 3-5 specific, step-by-step instructions for the next agent to revise this draft]
+
+---
+Critique the following draft article based on the system rubric.
+
+INPUT BRIEF:
+Provide a deep dive into feature leakage when predicting search click decline. Detail how columns derived directly from the label (such as 'trend_direction' or 'trend_pct' which use the same traffic thresholds) lead to artificially perfect metrics during validation but fail on future datasets. Explain how to design a strict leakage audit and how client-level data splitting (rather than random row splitting) prevents client leak.
+
+DRAFT ARTICLE:
+# Preventing Feature Leakage in Search Click Decline Modeling
+
+In machine learning, feature leakage is one of the most common reasons models fail in production. Feature leakage occurs when training data contains information about the target label that would not be available at the time of inference. In search ranking and SEO click modeling, feature leakage can make a model look exceptionally accurate in testing while rendering it completely useless on live data.
+
+## The Mechanism of Feature Leakage in Click Modeling
+
+When predicting whether a page's clicks will decline in the next month, the target label (e.g., `is_declining_label`) is often constructed using historical traffic changes. For example, a page might be labeled "declining" if its clicks dropped by more than 20% compared to the previous month.
+
+Leakage occurs when features representing the same underlying signal are included in the model. In search click datasets, fields like `trend_direction` or `trend_pct` are frequently included in raw data exports. Because these features are directly calculated from the click changes, they mirror the target label.
+
+If these columns are not removed, a machine learning model (such as a Decision Tree) will immediately identify them as the strongest predictors. During cross-validation, the model will achieve near-perfect precision and recall. However, when deployed, these trend features will not be available (since we are predicting future trends), causing the model's accuracy to collapse.
+
+## Preventing Client Leakage with Group-Based Splitting
+
+Another subtle form of leakage is client leakage. Many SEO datasets contain rows from multiple clients or websites. If we perform a simple random train-test split, rows from the same website will appear in both the training and testing sets.
+
+Websites have distinct traffic patterns, seasonal curves, and domain authorities. If a model trains on some pages from `example.com` and tests on other pages from `example.com`, it will memorize the specific behavior of that site rather than learning general features of click decline. This results in overfitting.
+
+To prevent client leakage, we must use client-level data splitting. This ensures that all pages from a single website or client are kept entirely within either the training set or the testing set, but never both.
+
+## Designing a Leakage Audit
+
+To prevent these issues, developers must implement a leakage audit before training. This audit involves inspecting the features, analyzing correlations, and reviewing how the training data was split. By identifying and removing leaking features early, we ensure the model learns generalizable search ranking behaviors.
+---
+
+Your response should contain only the structured critique, starting with the evaluation section.

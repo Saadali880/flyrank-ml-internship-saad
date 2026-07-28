@@ -1,0 +1,31 @@
+# Real-Time Search Ranking: Inference Latency and Performance Budgets
+
+In modern search engine architectures, search ranking is structured as a multi-stage funnel. While retrieval layers narrow down billions of documents to a few thousand candidates, the final re-ranking layer evaluates these candidates using complex machine learning models. For real-time applications, this re-ranking must occur within a strict performance budget, typically capped at a 14ms inference latency. Adhering to this budget is critical for maintaining an optimal user experience and preventing query abandonment.
+
+## The Critical 14ms Latency Budget
+
+Search engines operate under a tight budget. When a user enters a query, the entire round-trip time (RTT) must remain under 150-200ms to feel instantaneous. Within the backend, this budget is divided among network routing, candidate retrieval, document parsing, dynamic snippet generation, and ranking. 
+
+The re-ranking stage is allocated at most 14ms. If re-ranking exceeds this budget, the search engine suffers from search latency spikes. This forces the engine to either display stale cache results or drop candidate documents, directly degrading search quality.
+
+## Static Heuristics vs. Machine Learning Ensembles
+
+To understand the latency challenges, we compare static heuristic scoring with learned model ensembles:
+
+- **Static Heuristic Scoring**: Traditional approaches use simple algorithms like BM25, TF-IDF, or static page authority scores. These heuristics are fast, often taking less than 1ms. They rely on direct database index queries or simple calculations. However, they are low-lift, failing to capture complex feature interactions, search context, and user personalization.
+- **ML Ensemble Models**: Modern systems use Random Forests and Gradient Boosted Decision Trees (GBDTs), such as XGBoost or LightGBM. These models evaluate thousands of features and cross-feature interactions, achieving superior ranking precision. However, running inference for 1,000 documents using a forest of 500 trees is computationally expensive, often exceeding the 14ms latency limit without optimization.
+
+## Latency Optimization Techniques
+
+Maintaining sub-15ms execution requires combining hardware, caching, and software optimization techniques:
+
+### 1. Caching Strategies
+Search systems implement multi-level caching to bypass inference:
+- **Result Cache**: Caches the final ranked results for exact query strings.
+- **Model Score Cache**: Caches intermediate model scores for frequent query-document pairs, allowing the system to reuse scores for repeated query variations.
+
+### 2. Compiled Decision Trees
+Instead of traversing trees using pointers in Python or C++, modern ranking engines compile trees into native code. For client-side or web browser ranking, trees can be compiled directly into optimized WebAssembly or JavaScript. This eliminates pointer chasing and leverages processor branch predictors.
+
+### 3. Quantized Decision Boundaries
+Quantization reduces the precision of feature values and decision boundaries from float32 to int8. This allows the processor to perform evaluations using faster integer operations and reduces the memory bandwidth required to load model parameters.

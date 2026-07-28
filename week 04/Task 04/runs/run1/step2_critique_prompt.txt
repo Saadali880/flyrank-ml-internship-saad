@@ -1,0 +1,62 @@
+You are a principal technical editor and ML researcher. Your goal is to review draft technical articles and provide a detailed, critical review.
+Be honest, strict, and constructive. Point out specific gaps, inaccuracies, or poor formatting.
+
+Evaluate the draft against this 5-point rubric:
+1. Technical Accuracy & Precision: Are the concepts (e.g. ML models, SEO metrics) explained correctly?
+2. Readability & Structure: Is the logical flow clear? Are transitions smooth?
+3. Completeness: Does the article address all aspects of the brief?
+4. Tone & Professionalism: Is the tone objective and professional? Are there buzzwords or empty phrases?
+5. Formatting & Examples: Are code blocks, lists, and tables used effectively?
+
+Output format:
+Your critique must be structured as follows:
+### Rubric Evaluation
+- **Technical Accuracy & Precision**: [Score /5 + explanation]
+- **Readability & Structure**: [Score /5 + explanation]
+- **Completeness**: [Score /5 + explanation]
+- **Tone & Professionalism**: [Score /5 + explanation]
+- **Formatting & Examples**: [Score /5 + explanation]
+
+### Key Strengths
+- [List 2-3 key strengths]
+
+### Critical Gaps & Weaknesses
+- [List 2-3 specific issues or gaps]
+
+### Actionable Revision Instructions
+- [List 3-5 specific, step-by-step instructions for the next agent to revise this draft]
+
+---
+Critique the following draft article based on the system rubric.
+
+INPUT BRIEF:
+Explain the role of Click-Through Rate (CTR) in modern search engine ranking algorithms. Discuss how search engines use CTR as a dynamic signal (e.g., to adjust rankings based on user engagement) while guarding against click spam, clickbaity titles, and noise. Address how positional bias is corrected using statistical scaling (e.g. dividing by average CTR for that position).
+
+DRAFT ARTICLE:
+# Understanding Click-Through Rate (CTR) as a Search Ranking Signal
+
+Click-Through Rate (CTR) is a fundamental metric used by search engines to evaluate the relevance of search results. While classic ranking algorithms relied heavily on static features like page content and link structures, modern search engines utilize dynamic signals to refine search results in real time. Among these, user engagement signals—principally CTR—play a critical role.
+
+## CTR as a Dynamic Ranking Signal
+
+CTR is defined as the ratio of clicks to impressions for a given search query and page. Search engines use CTR as a feedback loop. If a page ranked at position 4 consistently receives more clicks than the page at position 2, it indicates to the search engine that the lower-ranked page may be more relevant to the user's intent. Consequently, the search engine might dynamically adjust the ranking, boosting the high-performing page.
+
+However, using raw CTR as a direct ranking signal is problematic. User behavior is highly noisy, and search engines must separate genuine user interest from query-level noise and seasonal shifts.
+
+## Positional Bias and Corrective Scaling
+
+The most significant challenge in using CTR is positional bias. Users are inherently biased toward clicking the top results, regardless of their actual relevance. A page in position 1 will receive a much higher CTR than a page in position 10, even if the content in position 10 is superior.
+
+To use CTR effectively, search engines must correct for this bias. This is done through statistical scaling. The raw CTR is divided by the average CTR for that specific position. This yields a normalized CTR that represents whether a page is performing above or below expectations for its rank.
+
+## Guarding Against Click Spam and Clickbait
+
+Another major challenge is manipulation. Webmasters can attempt to inflate CTR through click spam (using bots or click farms) or by writing clickbaity titles that promise more than the page delivers. 
+
+Search engines employ guardrails to protect the integrity of their ranking systems:
+- **Click Filtering**: Detecting automated bot traffic and filtering out suspicious clicks.
+- **Engagement Duration**: Measuring the dwell time or bounce rate. If a user clicks a result but returns to the search page within seconds, it suggests a clickbait title.
+- **Anomaly Detection**: Flagging sudden spikes in clicks that do not align with historical patterns.
+---
+
+Your response should contain only the structured critique, starting with the evaluation section.

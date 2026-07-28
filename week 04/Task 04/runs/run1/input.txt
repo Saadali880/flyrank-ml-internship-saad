@@ -1,0 +1,1 @@
+Explain the role of Click-Through Rate (CTR) in modern search engine ranking algorithms. Discuss how search engines use CTR as a dynamic signal (e.g., to adjust rankings based on user engagement) while guarding against click spam, clickbaity titles, and noise. Address how positional bias is corrected using statistical scaling (e.g. dividing by average CTR for that position).

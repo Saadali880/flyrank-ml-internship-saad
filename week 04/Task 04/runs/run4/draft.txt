@@ -1,0 +1,32 @@
+# Prioritizing Content Refresh: Heuristic Baselines vs. Machine Learning Models
+
+In large-scale SEO and content marketing, optimizing existing content is often more cost-effective than creating new articles. However, identifying which pages should be refreshed requires prioritizing thousands of URLs. Traditionally, SEOs have relied on manual rule-based heuristics to filter these pages. Modern search operations are transitioning to learned machine learning models, such as Random Forests, to dramatically improve prioritization accuracy and operational efficiency.
+
+## The Heuristic Baseline: Simplicity and Its Limitations
+
+A common heuristic for content prioritization is a threshold-based rule applied to search console data. For example:
+
+$$\text{Select page if: } \text{Impressions} > 10,000 \quad \text{AND} \quad \text{Monthly Click Decline} > 20\%$$
+
+While this rule is simple to implement and run inside standard database queries, it has low accuracy. When evaluated on historical data, this heuristic baseline yields a **Precision@50 of 0.24**. This means that out of the top 50 pages recommended for a refresh, only 12 actually deserved optimization, while the other 38 were false positives. 
+
+Heuristics are fragile for several reasons:
+- **Ignored Seasonality**: A 20% click decline in January might be due to normal holiday seasonality rather than content degradation.
+- **Position Bias**: A page drop from rank 1 to 2 causes a large raw click drop, but the page may still be highly optimized.
+- **Fixed Thresholds**: Rigid cutoffs ignore the continuous spectrum of traffic fluctuations.
+
+## The Machine Learning Approach: Random Forest Classifier
+
+To overcome these limits, a supervised machine learning model—specifically a Random Forest classifier—can be trained. The model leverages a broader set of features:
+- **Historical Traffic Features**: Click and impression trends over 30, 60, and 90 days.
+- **Position Metrics**: Average rank, rank volatility, and search query click-through rate.
+- **Content Change Signals**: Date of the last refresh, length changes, and keyword overlap metrics.
+
+When trained on this dataset, the Random Forest model achieves a **Precision@50 of 0.74**. This represents a **+208% lift** over the baseline heuristic. In practice, 37 out of the top 50 recommended pages are true candidates for optimization, tripling the return on content editing efforts.
+
+## Why the Learned Model is More Robust
+
+A Random Forest model is intrinsically more robust than static heuristics:
+1. **Handles Non-Linear Relationships**: Unlike rigid linear rules, decision trees can split data based on complex combinations of features (e.g., high impressions combined with rising rank but dropping clicks).
+2. **Feature Interaction**: The model automatically captures interaction effects between rank, impressions, and seasonal variables.
+3. **Bagging Reduces Variance**: Through bootstrap aggregation (bagging), Random Forests combine predictions from multiple decision trees. This prevents overfitting to noise or transient anomalies in search traffic, making the recommendations highly generalizable.

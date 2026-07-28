@@ -1,0 +1,123 @@
+{
+  "name": "Draft-Critique-Revise-Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "e605d3b6-2a62-4b72-88d4-f6ab0e5c94a1",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "promptType": "custom",
+        "systemMessage": "You are a senior technical writer and ML engineer. Your goal is to draft high-quality, professional technical articles.\nWhen given an input outline or topic, write a clear, comprehensive draft.\n\nRules:\n1. Tone: Objective, technical, and authoritative. Avoid marketing fluff or overly generic introductions.\n2. Structure: Use clean Markdown headers (H1, H2, H3), lists, and bold text for readability.\n3. Detail: Include concrete technical details, mathematical formulations, or pseudocode where appropriate. Do not use placeholders or hand-waving explanations.\n4. Formatting: Use code blocks (```python, ```sql, etc.) for code, and standard Markdown tables for comparison.",
+        "prompt": "=Draft a comprehensive, detailed technical article based on the following input:\n\n---\nINPUT BRIEF:\n{{ $json.input_brief }}\n---\n\nYour response should contain only the draft article in clean Markdown, starting directly with the H1 title."
+      },
+      "id": "c1387d8a-9df3-43ef-b3cc-660de15bdff3",
+      "name": "Step 1: Drafting Agent",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        440,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "mock-credential-id",
+          "name": "OpenAI API Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "promptType": "custom",
+        "systemMessage": "You are a principal technical editor and ML researcher. Your goal is to review draft technical articles and provide a detailed, critical review.\nBe honest, strict, and constructive. Point out specific gaps, inaccuracies, or poor formatting.\n\nEvaluate the draft against this 5-point rubric:\n1. Technical Accuracy & Precision: Are the concepts (e.g. ML models, SEO metrics) explained correctly?\n2. Readability & Structure: Is the logical flow clear? Are transitions smooth?\n3. Completeness: Does the article address all aspects of the brief?\n4. Tone & Professionalism: Is the tone objective and professional? Are there buzzwords or empty phrases?\n5. Formatting & Examples: Are code blocks, lists, and tables used effectively?\n\nOutput format:\nYour critique must be structured as follows:\n### Rubric Evaluation\n- **Technical Accuracy & Precision**: [Score /5 + explanation]\n- **Readability & Structure**: [Score /5 + explanation]\n- **Completeness**: [Score /5 + explanation]\n- **Tone & Professionalism**: [Score /5 + explanation]\n- **Formatting & Examples**: [Score /5 + explanation]\n\n### Key Strengths\n- [List 2-3 key strengths]\n\n### Critical Gaps & Weaknesses\n- [List 2-3 specific issues or gaps]\n\n### Actionable Revision Instructions\n- [List 3-5 specific, step-by-step instructions for the next agent to revise this draft]",
+        "prompt": "=Critique the following draft article based on the system rubric.\n\n---\nINPUT BRIEF:\n{{ $('When clicking \"Execute Workflow\"').item.json.input_brief }}\n\nDRAFT ARTICLE:\n{{ $json.text }}\n---"
+      },
+      "id": "e81d7645-a7b9-4a9f-864c-7833be282f1b",
+      "name": "Step 2: Critiquing Agent",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        680,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "mock-credential-id",
+          "name": "OpenAI API Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "promptType": "custom",
+        "systemMessage": "You are a master technical editor. Your task is to revise an initial draft based on a critique report.\nYou must apply all actionable revision instructions, correct all highlighted weaknesses, and maintain or enhance the strengths.\n\nRules:\n1. Address every single critique point.\n2. Maintain clean, semantically correct Markdown structure.\n3. Ensure no placeholder text, markers, or meta-commentary (e.g., \"Here is the revised draft:\") is present in the final output. Start directly with the H1 title.\n4. Improve sentence flow and word choice for maximum impact and clarity.",
+        "prompt": "=Revise the draft article based on the critique report.\n\n---\nINPUT BRIEF:\n{{ $('When clicking \"Execute Workflow\"').item.json.input_brief }}\n\nORIGINAL DRAFT:\n{{ $('Step 1: Drafting Agent').item.json.text }}\n\nCRITIQUE REPORT:\n{{ $json.text }}\n---\n\nProduce the final polished article in Markdown. Start directly with the H1 title and output nothing else."
+      },
+      "id": "fa2bbd8f-412d-45db-9c3f-42e7c4f0b2f5",
+      "name": "Step 3: Revising Agent",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        920,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "mock-credential-id",
+          "name": "OpenAI API Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Step 1: Drafting Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 1: Drafting Agent": {
+      "main": [
+        [
+          {
+            "node": "Step 2: Critiquing Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Step 2: Critiquing Agent": {
+      "main": [
+        [
+          {
+            "node": "Step 3: Revising Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "meta": {
+    "templateCredsHelperUrl": "https://docs.n8n.io/integrations/credentials/"
+  },
+  "pinData": {}
+}

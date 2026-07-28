@@ -1,0 +1,21 @@
+### Rubric Evaluation
+- **Technical Accuracy & Precision**: 4.0/5. The explanation of why `trend_direction` and `trend_pct` cause leakage is accurate, but it would benefit from a formal definition of the leakage math and a concrete decision tree split example.
+- **Readability & Structure**: 4.5/5. The document flows logically from defining the leakage mechanism to discussing client-level splitting and auditing.
+- **Completeness**: 3.5/5. The description of how to design a "strict leakage audit" is too abstract and needs a concrete checklist or implementation code snippet.
+- **Tone & Professionalism**: 4.5/5. Highly professional, objective, and clear of fluff.
+- **Formatting & Examples**: 3.0/5. Lacks diagrams, code snippets, or tables illustrating the row-splitting vs. client-splitting discrepancy.
+
+### Key Strengths
+- Clear and easy-to-understand explanation of client-level data splitting to prevent client leak.
+- Accurate description of why label-derived columns fail on live, future datasets.
+
+### Critical Gaps & Weaknesses
+- **No Concrete Audit Process**: The leakage audit is described at a high level without showing how a developer would actually run it (e.g., via correlation analysis or temporal validation).
+- **Lack of Code Examples**: A machine learning engineer needs to see how the data splitting is implemented (e.g., using `GroupKFold` or custom client splitting) and how the leaking features behave.
+- **No Visual Data Flow**: The differences between random splitting and client group splitting are hard to digest without a structural representation.
+
+### Actionable Revision Instructions
+1. **Provide a Data Splitting Visual**: Add a Markdown table contrasting "Random Row Split" (showing client overlap) with "Client-Level Group Split" (showing total segregation).
+2. **Add a Python Code Example for Group Splitting**: Write a clean Python snippet using `scikit-learn`'s `GroupKFold` or custom logic to demonstrate client-based splitting.
+3. **Include a Leakage Audit Code Snippet**: Provide a Python function showing how to check for features that correlate perfectly with the target, or have near-1.0 feature importance in a quick decision tree run.
+4. **Clarify the Derivation Math**: Show how the target label `is_declining` is derived from the click difference, highlighting the direct mathematical relationship with `trend_pct`.

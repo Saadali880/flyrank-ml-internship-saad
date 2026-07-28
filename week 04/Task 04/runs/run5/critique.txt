@@ -1,0 +1,21 @@
+### Rubric Evaluation
+- **Technical Accuracy & Precision**: 4.0/5. The identification of tail variance and seasonal post-spike reversion is conceptually sound, but the exact statistical scaling and intervals are missing mathematical precision.
+- **Readability & Structure**: 4.5/5. Headings are clear and the text is easy to read.
+- **Completeness**: 3.5/5. The brief asks to "Propose statistical safeguards, including baseline traffic threshold filters, confidence-interval-based click signals, and sliding-window average smoothing." The proposed solutions are only explained conceptually, lacking code and formulas.
+- **Tone & Professionalism**: 5.0/5. The tone is highly professional and analytical.
+- **Formatting & Examples**: 3.0/5. There are no tables, code blocks, or mathematical formulas in the draft.
+
+### Key Strengths
+- Clear explanation of the "Law of Small Numbers" in the context of tail search queries.
+- Correct identification of the post-holiday traffic drop as a false positive decay signal.
+
+### Critical Gaps & Weaknesses
+- **No Mathematical Formulations**: The confidence interval safeguard is mentioned without specifying which test or interval to use (e.g., Wilson Score Interval or z-test for proportions) or its equation.
+- **No Code Examples**: A machine learning engineer needs to see how the pandas pre-processing pipeline is written to filter tail queries and apply rolling averages.
+- **No YoY Normalization**: While sliding windows are mentioned, Year-over-Year (YoY) comparison is the standard way to remove seasonal bias, which is omitted.
+
+### Actionable Revision Instructions
+1. **Introduce the Wilson Score Interval Equation**: Provide the formal mathematical representation of the Wilson Score Interval to calculate CTR confidence bounds.
+2. **Write a Python Pre-processing Script**: Provide a clean Python snippet using `pandas` and `numpy` that filters out tail queries (impressions < 100), computes a 90-day rolling average for clicks, and flags statistically significant CTR declines.
+3. **Add a Safeguard Summary Table**: Include a Markdown table detailing the Noise Type, Failure Mode, Statistical Safeguard, and Mathematical Metric.
+4. **Explain YoY Normalization**: Add a section describing how to normalize traffic by comparing Month $M$ of Year $Y$ to Month $M$ of Year $Y-1$ to isolate seasonal spikes.
