@@ -5,14 +5,14 @@
 - **Repo:** https://github.com/Saadali880/flyrank-ml-internship-saad
 - **Date:** July 29, 2026
 
-## 1. Problem framing
+## 1. Problem framing & Case Study
 
-The goal of this system is to prioritize content pages for review and refresh to halt organic search traffic decay and optimize reviewer time.
+This system serves as a case study for **FlyRank**, a platform that builds and maintains content-as-infrastructure by automatically publishing and optimizing client websites. In production, FlyRank's software uses hand-written product flags (such as heuristic health scores and fixed-threshold quick-win rules) to flag pages needing attention. The goal of this machine learning system is to replace those fixed, hand-written rules with a trained model that can prioritize content pages for refresh to halt organic search traffic decay and optimize reviewer time.
 - **Unit of Analysis**: The individual content page.
 - **Output**: A blended refresh opportunity score (0 to 100) and suggested action classifications.
 - **Action**: A content reviewer opens the top-ranked pages and decides whether to perform a structural text refresh, edit titles/metas for CTR, reorganize layout for engagement, or monitor.
 - **Cost of a Wrong Call**: A false positive wastes reviewer time on a healthy page and risks disrupting a good ranking. A false negative results in unnoticed traffic cannibalization and revenue decline.
-- **Why ML Helps**: Simple heuristic rules cannot scale or isolate linear feature interactions across varying client page sizes. Machine learning models identify multi-dimensional patterns associated with decline.
+- **Why ML Helps**: FlyRank's existing product flags struggle because search signals are multi-dimensional, correlated, and client-specific. Machine learning models identify these complex patterns across varying client sizes, significantly outperforming hand-written rules.
 
 ## 2. Data safety
 
