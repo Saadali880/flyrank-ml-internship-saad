@@ -1,0 +1,17 @@
+{
+  "rows_scored": 30000,
+  "best_model_name": "random_forest",
+  "high_confidence_count": 3576,
+  "medium_confidence_count": 11424,
+  "low_confidence_count": 15000,
+  "action_counts": {
+    "monitor": 13069,
+    "refresh": 8207,
+    "refresh_and_review_ctr": 6655,
+    "refresh_and_review_engagement": 1987,
+    "expand_and_refresh": 82
+  },
+  "best_model_roc_auc": 0.7473724773607304,
+  "best_model_precision_at_50": 0.68,
+  "baseline_precision_at_50": 0.24
+}
