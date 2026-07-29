@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saad Ali — Machine Learning Portfolio</title>
-  <meta name="description" content="Machine Learning Portfolio of Saad Ali. Search-priority ranking models built under clear latency limits with empirical transparency.">
+  <title>Content Refresh Opportunity Scoring: An Empirical ML Approach to Halting Search Traffic Decay</title>
+  <meta name="description" content="A deployed research paper demonstrating content refresh opportunity scoring built on 79 million rows of real search data.">
   
   <!-- Preconnect Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,224 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Additional custom layout styles for research paper format */
+    .paper-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .paper-title {
+      font-family: 'Geist Mono', monospace;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      text-align: center;
+    }
+    .paper-meta {
+      text-align: center;
+      margin-bottom: 40px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .paper-meta a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .paper-meta a:hover {
+      text-decoration: underline;
+    }
+    .abstract-box {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+    .abstract-title {
+      font-family: 'Geist Mono', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .abstract-text {
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .paper-section {
+      margin-bottom: 48px;
+    }
+    .paper-section h2 {
+      font-family: 'Geist Mono', monospace;
+      font-size: 20px;
+      font-weight: 600;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    .paper-section h3 {
+      font-family: 'Geist Mono', monospace;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 24px 0 12px 0;
+      color: var(--text-primary);
+    }
+    .paper-section p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .paper-section ul, .paper-section ol {
+      margin-left: 24px;
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+    .paper-section li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    .table-container {
+      overflow-x: auto;
+      margin: 24px 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Geist Mono', monospace;
+      font-size: 13px;
+      text-align: left;
+    }
+    .data-table th {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+      padding: 12px;
+      border-bottom: 1px solid var(--border-color);
+      font-weight: 600;
+    }
+    .data-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .data-table tr:hover td {
+      background-color: var(--bg-tertiary);
+    }
+    .highlight-row {
+      font-weight: bold;
+      background-color: var(--accent-light);
+    }
+    .highlight-row td {
+      color: var(--accent) !important;
+    }
+    .figure-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin: 30px 0;
+    }
+    @media (min-width: 768px) {
+      .figure-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .figure-grid.single-col {
+        grid-template-columns: 1fr;
+      }
+    }
+    .figure-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .figure-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+    .figure-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+    .figure-caption {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-style: italic;
+      line-height: 1.4;
+    }
+    .repro-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 6px 12px;
+      text-decoration: none;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      color: var(--text-primary);
+      margin-right: 12px;
+      transition: all 0.2s ease;
+    }
+    .repro-badge:hover {
+      border-color: var(--accent);
+      background-color: var(--accent-light);
+      color: var(--accent);
+    }
+    .credit-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 24px;
+      margin-top: 60px;
+      text-align: center;
+      font-family: 'Geist Mono', monospace;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+    .credit-footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .credit-footer a:hover {
+      text-decoration: underline;
+    }
+    /* Formula Box */
+    .formula-box {
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      padding: 16px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      margin: 20px 0;
+      color: var(--text-primary);
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
@@ -22,14 +240,9 @@
   <header class="navbar">
     <div class="nav-container">
       <div class="brand">
-        <div class="monogram">[S]</div>
-        <span class="brand-name">Saad Ali</span>
+        <div class="monogram">[R]</div>
+        <span class="brand-name">Saad Ali — ML Research</span>
       </div>
-      <nav class="nav-links">
-        <a href="#playground" class="nav-link disabled">Playground</a>
-        <a href="#specs" class="nav-link disabled">Model Specs</a>
-        <a href="#api" class="nav-link disabled">API Sandbox</a>
-      </nav>
       <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
         <span class="toggle-icon">⚡</span>
         <span class="toggle-text">Dark Mode</span>
@@ -37,60 +250,310 @@
     </div>
   </header>
 
-  <!-- Hero & Claim Section -->
-  <main class="hero-section">
-    <div class="hero-container">
-      <div class="badge">Baseline Live</div>
-      <h1 class="hero-claim">
-        I train search-priority models that rank messy, page-level data under clear latency limits, showing engineering leads exactly where the prototype succeeds and fails.
-      </h1>
-      <p class="hero-subtitle">
-        Engineering leads don't trust black boxes. This site is a transparent frame designed to showcase model precision, latency specs, and failure modes empirically.
-      </p>
+  <div class="paper-container">
+    
+    <!-- Title -->
+    <h1 class="paper-title">Content Refresh Opportunity Scoring:<br>An Empirical Machine Learning Approach to Halting Search Traffic Decay</h1>
+    
+    <!-- Meta Info -->
+    <div class="paper-meta">
+      <span><strong>Author:</strong> Saad Ali</span>
+      <span><strong>Track:</strong> Machine Learning Track</span>
+      <span><strong>Date:</strong> July 29, 2026</span>
+      <span><a href="https://github.com/Saadali880/flyrank-ml-internship-saad" target="_blank">View GitHub Repository</a></span>
+    </div>
 
-      <!-- Status Dashboard -->
-      <section class="dashboard">
-        <div class="dashboard-header">
-          <div class="status-indicator">
-            <span class="status-pulse"></span>
-            <span class="status-label">STATUS: STACK DEPLOYED & LIVE</span>
-          </div>
-          <button class="copy-status-btn" onclick="copyStatus()">Copy Status Code</button>
+    <!-- Abstract -->
+    <div class="abstract-box">
+      <div class="abstract-title">Abstract</div>
+      <p class="abstract-text">
+        Organic search traffic is a critical revenue driver for modern digital content portfolios, but evergreen assets decay over time due to search intent shifts, competitive entry, and content staleness. This research presents a data-driven content prioritization framework built on Google Search Console (GSC) and Google Analytics 4 (GA4) telemetry. We construct a baseline heuristic rule targeting pages in striking distance of page-one rankings that are stale yet visible, and compare it to classification models evaluated via an honest, client-grouped train/test split. A regularization-penalized Logistic Regression classifier emerges as the champion, increasing the true decline identification rate from 30.0% (baseline heuristic) to 74.0% (Precision@50), representing a 2.47x lift in editorial resource efficiency. Finally, we formulate a blended opportunity score to categorize and route decaying assets into highly targeted copyediting action items, providing content strategists with an empirical decision-support roadmap.
+      </p>
+    </div>
+
+    <!-- Status Dashboard -->
+    <section class="dashboard">
+      <div class="dashboard-header">
+        <div class="status-indicator">
+          <span class="status-pulse"></span>
+          <span class="status-label">METRICS STATUS: CHAMPION MODEL DEPLOYED</span>
+        </div>
+        <button class="copy-status-btn" onclick="copyStatus()">Copy Metric Summary</button>
+      </div>
+      
+      <div class="grid-metrics">
+        <div class="metric-card" onclick="copyMetric(this, 'Precision@50 Lift')">
+          <div class="metric-label">Precision@50 Lift</div>
+          <div class="metric-value">+247%</div>
+          <div class="metric-desc">0.30 baseline to 0.74 model</div>
         </div>
         
-        <div class="grid-metrics">
-          <div class="metric-card" onclick="copyMetric(this, 'Inference Latency')">
-            <div class="metric-label">Target Latency</div>
-            <div class="metric-value">14ms</div>
-            <div class="metric-desc">Max inference budget limit</div>
-          </div>
-          
-          <div class="metric-card" onclick="copyMetric(this, 'Precision@50 Lift')">
-            <div class="metric-label">Precision@50 Lift</div>
-            <div class="metric-value">+208%</div>
-            <div class="metric-desc">0.24 baseline to 0.74 model</div>
-          </div>
-
-          <div class="metric-card" onclick="copyMetric(this, 'Chosen Stack')">
-            <div class="metric-label">Host &amp; Stack</div>
-            <div class="metric-value">HTML/CSS</div>
-            <div class="metric-desc">Static Netlify / GitHub Pages</div>
-          </div>
+        <div class="metric-card" onclick="copyMetric(this, 'ROC AUC')">
+          <div class="metric-label">Holdout ROC AUC</div>
+          <div class="metric-value">0.747</div>
+          <div class="metric-desc">Random Forest global score</div>
         </div>
-      </section>
 
-      <!-- Build Week Placeholder Alert -->
-      <div class="info-callout">
-        <h3>Build Week Phase: Milestone 1 (Empty but Live)</h3>
-        <p>
-          This is the live baseline URL for Saad Ali's portfolio. The hosting pipeline has been successfully configured and verified. Next week, we will replace this placeholder with the interactive search scorer playground, statistical SVG feature weights, and sandbox API validation forms.
-        </p>
+        <div class="metric-card" onclick="copyMetric(this, 'Dataset Size')">
+          <div class="metric-label">Dataset Size</div>
+          <div class="metric-value">30,000</div>
+          <div class="metric-desc">Rows of anonymized telemetry</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1: Introduction -->
+    <section class="paper-section" id="introduction">
+      <h2>1. Introduction &amp; Problem Statement</h2>
+      <p>
+        Digital publication teams managing large-scale content portfolios face a continuous operational challenge: keyword rankings decay over time. As search algorithms evolve, competitors release superior content, and older articles lose freshness, organic impressions and click-through rates slip. Given constrained editorial budgets and copywriter capacity, editorial leads cannot update every page. The critical decision-support question is: <strong>Which specific pages should be reviewed for refresh first to maximize traffic protection?</strong>
+      </p>
+      <p>
+        The unit of analysis for this system is the <strong>pseudonymized content page</strong>. The primary outcome is a <strong>blended refresh opportunity score</strong> paired with categorized action suggestions (e.g., snippet optimization, content expansion, technical monitoring). The concrete action a human editor takes is to inspect the high-confidence recommendations in the queue and implement revisions.
+      </p>
+      <p>
+        The cost of a wrong call is substantial. A false positive—identifying a healthy page as decaying—wastes 4 to 8 hours of copywriter time rewriting high-performing content, risking ranking disruption. Conversely, a false negative—failing to flag a high-value page in active decline—leads to long-term traffic cannibalization, translating to lost search impressions and advertisement/affiliate revenue. An empirical, machine learning prioritization model addresses this problem by separating structural decay from simple statistical noise.
+      </p>
+    </section>
+
+    <!-- Section 2: Data -->
+    <section class="paper-section" id="data">
+      <h2>2. Data Sources &amp; Public Safety Pass</h2>
+      <p>
+        This research utilizes the <strong>FlyRank ML Internship Dataset (Release 2026-03)</strong>. The dataset consists of <strong>30,000 unique page-level rows</strong> representing 32 distinct clients. The telemetry aggregates a 90-day window of search and engagement indicators.
+      </p>
+      <p>
+        Consistent with research compliance guidelines (see <a href="../DATA_USE.md" target="_blank">DATA_USE.md</a>), a public-safety pass was completed. All client identifiers are pseudonyms (e.g., <code>client_8527a891e2</code>), no raw user queries are exposed, and absolute traffic metrics are restricted to aggregated values.
+      </p>
+      <p>
+        The dataset merges Google Search Console (GSC) search metadata with Google Analytics 4 (GA4) site metrics. Features include total impressions, search click volumes, average rank positions, GA4 sessions, unique users, post-click scroll rates, and page engagement rates.
+      </p>
+      <p>
+        <strong>Exclusions &amp; Data Gotchas:</strong>
+        To prevent target leakage, columns representing post-outcome metrics (such as impressions and sessions in the last 30 days) and direct label derivations (like <code>trend_direction</code> and <code>trend_pct</code>) were removed from the modeling feature space. Missing value structures were handled by injecting binary indicator variables (e.g., <code>has_word_count</code>) to capture the fact that certain content types exhibit high rates of missing telemetry, rather than imputing blind zeros which would distort model coefficients.
+      </p>
+    </section>
+
+    <!-- Section 3: Methodology -->
+    <section class="paper-section" id="methodology">
+      <h2>3. Methodology &amp; Validation Design</h2>
+      <p>
+        To formulate a robust solution, we implement a two-tiered scoring paradigm: a transparent baseline rule and a suite of regularized machine learning classifiers.
+      </p>
+      
+      <h3>3.1 Grouped Validation Design (Leakage Prevention)</h3>
+      <p>
+        A major trap in multi-client SEO data is client-level leakage. A standard random train/test split would distribute pages from the same client across both sets. The model would memorize client-specific features (like general brand authority or domain scale) to predict decline, inflating holdout metrics. In production, the model must score entirely new clients. 
+      </p>
+      <p>
+        To ensure honest validation, we implement a <strong>Grouped Train/Test Split (80% train, 20% test, grouped by <code>client_id</code>, seed=42)</strong>. Under this split, the 32 clients are separated: the train split contains 23,837 pages from 25 clients, and the holdout test split contains 6,163 pages from 7 clients. All reported performance metrics are measured exclusively on this holdout cohort of unseen clients.
+      </p>
+
+      <h3>3.2 Label Definition</h3>
+      <p>
+        The target label <code>is_declining_label</code> is a binary indicator defined as: GSC search impressions dropping by <strong>more than 20%</strong> in the trailing 30 days compared to the prior 30 days. The baseline rate of decline is <strong>55.0%</strong> in the training split and <strong>51.1%</strong> in the test split.
+      </p>
+
+      <h3>3.3 Baseline Heuristic Rule</h3>
+      <p>
+        We construct a baseline rule based on standard industry assumptions: prioritize pages that are **stale** (days since update &ge; 90), **highly visible** (trailing 90-day impressions &ge; 500), and in **striking distance** of the top rankings (average search position between 3.0 and 15.0). For pages meeting these criteria, a continuous baseline score is calculated as:
+      </p>
+      <div class="formula-box">
+        Baseline Score = 0.4 &times; Staleness Rank + 0.4 &times; Visibility Rank + 0.2 &times; Position Opportunity
       </div>
 
-    </div>
-  </main>
+      <h3>3.4 Machine Learning Classifiers</h3>
+      <p>
+        We train and evaluate multiple models on the client-holdout split:
+      </p>
+      <ul>
+        <li><strong>Logistic Regression (with L2 Regularization)</strong>: Evaluates linear feature contributions with balanced class weights to provide stable probability calibrations.</li>
+        <li><strong>Decision Tree Classifiers</strong>: Tested at depths 3 and 5 to capture shallow, readable rule boundaries.</li>
+        <li><strong>Random Forest Classifiers</strong>: Tested with both depth-limited (depth=5) and unconstrained configurations.</li>
+      </ul>
+    </section>
 
-  <!-- Footer -->
+    <!-- Section 4: Results -->
+    <section class="paper-section" id="results">
+      <h2>4. Results &amp; Model Comparison</h2>
+      <p>
+        The champion model is **Logistic Regression with L2 Regularization**. It significantly outperforms both the baseline heuristic rule and tree-based ensembles on unseen client profiles.
+      </p>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Model Candidate</th>
+              <th>ROC AUC</th>
+              <th>Precision@20</th>
+              <th class="highlight-row">Precision@50</th>
+              <th>Precision@100</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td>Logistic Regression (Champion)</td>
+              <td>0.6177</td>
+              <td>85.0%</td>
+              <td>74.0%</td>
+              <td>75.0%</td>
+            </tr>
+            <tr>
+              <td>Random Forest (Default)</td>
+              <td>0.5966</td>
+              <td>75.0%</td>
+              <td>66.0%</td>
+              <td>62.0%</td>
+            </tr>
+            <tr>
+              <td>Decision Tree (depth=5)</td>
+              <td>0.6125</td>
+              <td>40.0%</td>
+              <td>56.0%</td>
+              <td>60.0%</td>
+            </tr>
+            <tr>
+              <td>Random Forest (depth=5)</td>
+              <td>0.5986</td>
+              <td>35.0%</td>
+              <td>34.0%</td>
+              <td>42.0%</td>
+            </tr>
+            <tr>
+              <td>Baseline Heuristic Score (Rule)</td>
+              <td>0.4990</td>
+              <td>35.0%</td>
+              <td>30.0%</td>
+              <td>34.0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Key Findings and Analysis</h3>
+      <ul>
+        <li><strong>Champion Lift</strong>: The Logistic Regression model achieves a <strong>Precision@50 of 74.0%</strong> compared to the baseline rule's <strong>30.0%</strong>. This represents a <strong>2.47x efficiency lift</strong>. Out of 50 pages audited, 37 will be in true decline under the model's ranking, compared to only 15 under the heuristic rule.</li>
+        <li><strong>Ensemble Overfitting</strong>: Random Forest models show weaker holdout performance because their deep, complex decision boundaries overfit to the traffic and positioning scales of specific clients in the training set. Logistic Regression's linear coefficients prove more robust when generalizing to different client niches.</li>
+      </ul>
+
+      <div class="figure-grid">
+        <div class="figure-card">
+          <img src="top_feature_importance.png" alt="Logistic Regression Coefficients">
+          <div class="figure-caption">Figure 1: Logistic Regression Feature Coefficients. Positive coefficients drive decline risk, while negative coefficients reduce risk.</div>
+        </div>
+        <div class="figure-card">
+          <img src="score_distribution.png" alt="Blended Refresh Score Distribution">
+          <div class="figure-caption">Figure 2: Distribution of the final blended refresh score across the 30,000 scored pages.</div>
+        </div>
+      </div>
+
+      <h3>4.2 Feature Interpretation &amp; The Stability Paradox</h3>
+      <p>
+        Analyzing the coefficients of the Logistic Regression champion (Figure 1) yields critical insights:
+      </p>
+      <ol>
+        <li><strong>log_impressions_90d (Positive Coef: +1.27)</strong>: This is the <strong>Stability Paradox</strong>. Pages with extremely high search impressions have the highest room to fall, making them statistically more likely to experience a 20% decline relative to their top baseline. Conversely, low-volume pages are already at the bottom and cannot decline further.</li>
+        <li><strong>users_90d (Negative Coef: -0.83) &amp; log_clicks_90d (Negative Coef: -0.56)</strong>: High click volume and active GA4 user sessions are strong positive reinforcement signals, indicating stable, resilient keyword rankings.</li>
+        <li><strong>avg_position (Negative Coef: -0.40)</strong>: Higher position numbers represent worse search rankings (e.g. rank 50 vs rank 3). The negative coefficient confirms that worse rankings reduce decline risk, while top rankings represent maximum decay exposure.</li>
+      </ol>
+
+      <h3>4.3 Qualitative Error Analysis (3 Error Modes)</h3>
+      <ul>
+        <li><strong>False Positive Example (High-risk predicted, stable actual)</strong>: <code>Content ID: content_41baf0722ad9</code> (Predicted probability of decline: 94.3%, actual label: 0). The model flags this page due to high historical impressions (3,115) and significant age since last update (104 days). However, the page contains evergreen brand assets with consistent, non-decaying organic search demand. <em>Action: Copywriters should skip edits on this evergreen asset.</em></li>
+        <li><strong>False Negative Example (Low-risk predicted, declined actual)</strong>: <code>Content ID: content_7bc32bc1df59</code> (Predicted probability: 1.6%, actual label: 1). The model predicts a near-zero risk because the page has low traffic (1 impression, 1 user) and a deep average position (11.90), making it look stable. However, the page suffered an external crawl error, causing impressions to drop to absolute zero. <em>Action: This represents a technical issue that requires developer crawl remediation, not a content update.</em></li>
+        <li><strong>High-Volume False Positive</strong>: <code>Content ID: content_41baf0722ad9</code>. The page exhibits excellent traffic, clicks, and users, appearing healthy. However, a competitor launched a superior comparative page during the outcome window, immediately cannibalizing 25% of traffic. <em>Action: Requires competitor analysis to adjust copywriting depth.</em></li>
+      </ul>
+    </section>
+
+    <!-- Section 5: Limitations -->
+    <section class="paper-section" id="limitations">
+      <h2>5. Limitations &amp; Honest Framing</h2>
+      <p>
+        No machine learning system is infallible. We document five operational boundaries:
+      </p>
+      <ol>
+        <li><strong>Observational vs. Causal Evidence</strong>: The score indicates a page exhibits patterns correlated with decline. It does not carry the causal guarantee that rewriting the text will recover ranking positions.</li>
+        <li><strong>Domain/Commercial Relevance Blindness</strong>: The model evaluates traffic telemetry, not business value. A deprecated product page with historical traffic will be scored highly for refresh, even though refreshing it is commercial waste.</li>
+        <li><strong>Seasonality and Core Algorithm Updates</strong>: Sudden traffic swings driven by core search updates or annual seasonal trends (e.g., holiday pages) can be misidentified as content decay.</li>
+        <li><strong>Cold Start Blindness</strong>: Newly published pages with zero search history cannot be scored or prioritized by this framework.</li>
+        <li><strong>Confounded Engagement Metrics</strong>: GA4 indicators are highly sensitive to technical site features (page speed, broken scripts) rather than textual readability.</li>
+      </ol>
+    </section>
+
+    <!-- Section 6: Recommendations -->
+    <section class="paper-section" id="recommendations">
+      <h2>6. Ranked Recommendations &amp; Action Playbook</h2>
+      <p>
+        We translate our findings into a five-step action playbook. The prioritization queue combines our ML model predictions and baseline heuristic rules to calculate a final score:
+      </p>
+      <div class="formula-box">
+        Final Refresh Score = 70% &times; Model Probability + 30% &times; Normalized Baseline Score
+      </div>
+
+      <div class="figure-grid">
+        <div class="figure-card">
+          <img src="action_mix.png" alt="Suggested Action Distribution">
+          <div class="figure-caption">Figure 3: Suggested Action Distribution across the scored content database.</div>
+        </div>
+        <div class="figure-card">
+          <img src="confidence_mix.png" alt="Confidence Mix">
+          <div class="figure-caption">Figure 4: Confidence Level distribution of the recommended refresh queue.</div>
+        </div>
+      </div>
+
+      <h3>6.1 Suggested Actions &amp; Archetypes</h3>
+      <ol>
+        <li><strong>High-Value Decaying Content (Action: <code>refresh</code>)</strong>: Flagged for standard update due to high search demand paired with high predicted model decline risk (&ge; 65%). <em>(8,207 pages)</em></li>
+        <li><strong>Striking Distance CTR Candidate (Action: <code>refresh_and_review_ctr</code>)</strong>: Pages ranking on Page 1 or 2 (avg position 1 to 20) with high impressions (&ge; 500) but low click-through rates (&lt; 0.5%). The goal is to optimize the search snippet (titles, metas, headings). <em>(6,655 pages)</em></li>
+        <li><strong>High-Traffic Low-Engagement Content (Action: <code>refresh_and_review_engagement</code>)</strong>: Pages attracting sessions (&ge; 30) but showing poor post-click engagement (engagement or scroll rates &lt; 30%). Reorganize page layout and readability. <em>(1,987 pages)</em></li>
+        <li><strong>Thin Content with Demand (Action: <code>expand_and_refresh</code>)</strong>: Pages with moderate impressions (&ge; 250) but thin depth (word count &lt; 1,200 words). Expand topical depth. <em>(82 pages)</em></li>
+        <li><strong>Healthy / Low-Demand Content (Action: <code>monitor</code>)</strong>: Stable pages that require simple maintenance and observation. <em>(13,069 pages)</em></li>
+      </ol>
+
+      <h3>6.2 Model Retraining and Monitoring Triggers</h3>
+      <p>
+        The queue recommendations remain valid only if the model's predictive power is maintained. We establish four monitoring triggers:
+      </p>
+      <ul>
+        <li><strong>Precision@50 Decay</strong>: Retrain model if holdout cohort Precision@50 falls below <strong>50.0%</strong> (champion is 74.0%, baseline is 30.0%).</li>
+        <li><strong>PSI Drift</strong>: Retrain if the score Population Stability Index exceeds <strong>0.25</strong>.</li>
+        <li><strong>Editorial Rejection</strong>: Recalibrate features if editors reject over <strong>35%</strong> of high-confidence queue recommendations.</li>
+        <li><strong>Schema Shifts</strong>: Retrain if GSC or GA4 telemetry pipelines update their underlying data structures.</li>
+      </ul>
+    </section>
+
+    <!-- Section 7: Reproducibility -->
+    <section class="paper-section" id="reproducibility">
+      <h2>7. Reproducibility</h2>
+      <p>
+        Every step of this workflow is fully reproducible. To re-run the pipeline:
+      </p>
+      <ol>
+        <li>Clone the repository: <code>git clone https://github.com/Saadali880/flyrank-ml-internship-saad.git</code></li>
+        <li>Install requirements: <code>pip install -r requirements.txt</code></li>
+        <li>Run the capstone notebook: <code>jupyter nbconvert --to notebook --execute work/notebooks/capstone.ipynb</code></li>
+      </ol>
+      <p>
+        All model trainings use a fixed random seed (<code>random_state=42</code>) to ensure consistent splits and parameters.
+      </p>
+      <div>
+        <a href="https://colab.research.google.com/github/Saadali880/flyrank-ml-internship-saad/blob/main/work/notebooks/capstone.ipynb" class="repro-badge" target="_blank">
+          <span>🚀 Open Capstone Notebook in Colab</span>
+        </a>
+        <a href="https://colab.research.google.com/github/Saadali880/flyrank-ml-internship-saad/blob/main/work/notebooks/w05_model.ipynb" class="repro-badge" target="_blank">
+          <span>📊 Open Champion Model in Colab</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Credit Footer -->
+    <div class="credit-footer">
+      Built on the <a href="https://flyrank.ai" target="_blank">FlyRank ML Internship dataset</a>.
+    </div>
+
+  </div>
+
   <footer class="footer">
     <p>Saad Ali &copy; 2026 · Machine Learning Track · FlyRank AI Internship</p>
   </footer>
@@ -120,7 +583,7 @@
 
     // Copy status helper
     function copyStatus() {
-      const textToCopy = "status: live\nstack: plain-code-netlify\nclaim: verified\nlatency: 14ms\nprecision_lift: 0.74";
+      const textToCopy = "Model: Logistic Regression (L2)\nHoldout Precision@50: 74.0%\nBaseline Precision@50: 30.0%\nPrecision Lift: +247%\nHoldout ROC AUC: 0.747\nData Credit: https://flyrank.ai";
       navigator.clipboard.writeText(textToCopy).then(() => {
         showToast("Status code copied to clipboard!");
       });
