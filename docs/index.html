@@ -323,8 +323,51 @@
     <section class="paper-section" id="data">
       <h2>2. Data Sources &amp; Public Safety Pass</h2>
       <p>
-        This research utilizes the <strong>FlyRank ML Internship Dataset (Release 2026-03)</strong>. The dataset consists of <strong>30,000 unique page-level rows</strong> representing 32 distinct clients. The telemetry aggregates a 90-day window of search and engagement indicators.
+        This research utilizes two primary data layers from the <strong>FlyRank ML Internship Dataset (Release v202603 and v202607)</strong>. The primary modeling dataset consists of <strong>30,000 unique page-level rows</strong> representing 32 distinct clients with trailing 90-day search and engagement telemetry. 
       </p>
+      <p>
+        To model at scale, we reference the full-scale <strong>Hugging Face Warehouse Release (Build v20260703)</strong> hosted at <code>hf://datasets/FlyRank/internship-warehouse</code>. This warehouse covers the date window from <strong>2025-01-27 to 2026-06-30</strong> (~17 months) and contains the following relational tables and grains:
+      </p>
+      
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Table Name</th>
+              <th>Row Count</th>
+              <th>Data Grain</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>dim_clients</code></td>
+              <td>104</td>
+              <td>One per client id</td>
+              <td>Client pseudonyms and history bounds (GSC/GA4 start dates)</td>
+            </tr>
+            <tr>
+              <td><code>dim_content</code></td>
+              <td>519,606</td>
+              <td>One per content item</td>
+              <td>Metadata containing content type, word count, character count</td>
+            </tr>
+            <tr>
+              <td><code>fact_content_daily_performance</code></td>
+              <td>78,835,655</td>
+              <td>Date &times; Client &times; Content</td>
+              <td>Daily impressions, clicks, average position, sessions, users</td>
+            </tr>
+            <tr>
+              <td><code>fact_content_query_90d</code></td>
+              <td>2,414,248</td>
+              <td>Client &times; Content &times; Query</td>
+              <td>Search query impressions, clicks, position in final 90 days</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <p>
         Consistent with research compliance guidelines (see <a href="../DATA_USE.md" target="_blank">DATA_USE.md</a>), a public-safety pass was completed. All client identifiers are pseudonyms (e.g., <code>client_8527a891e2</code>), no raw user queries are exposed, and absolute traffic metrics are restricted to aggregated values.
       </p>
@@ -442,7 +485,7 @@
 
       <div class="figure-grid">
         <div class="figure-card">
-          <img src="top_feature_importance.png" alt="Logistic Regression Coefficients">
+          <img src="top_feature_importance.svg" alt="Logistic Regression Coefficients">
           <div class="figure-caption">Figure 1: Logistic Regression Feature Coefficients. Positive coefficients drive decline risk, while negative coefficients reduce risk.</div>
         </div>
         <div class="figure-card">
@@ -496,11 +539,11 @@
 
       <div class="figure-grid">
         <div class="figure-card">
-          <img src="action_mix.png" alt="Suggested Action Distribution">
+          <img src="action_mix.svg" alt="Suggested Action Distribution">
           <div class="figure-caption">Figure 3: Suggested Action Distribution across the scored content database.</div>
         </div>
         <div class="figure-card">
-          <img src="confidence_mix.png" alt="Confidence Mix">
+          <img src="confidence_mix.svg" alt="Confidence Mix">
           <div class="figure-caption">Figure 4: Confidence Level distribution of the recommended refresh queue.</div>
         </div>
       </div>
