@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,6 +28,7 @@
         <a href="#playground" class="nav-link">Interactive Scorer</a>
         <a href="#agent-section" class="nav-link">Personal Agent</a>
         <a href="#specs" class="nav-link">Model Specs</a>
+        <a href="#about" class="nav-link">About &amp; Contact</a>
         <a href="next_case_study.md" class="nav-link">Growth Plan</a>
         <a href="../index.html" class="nav-link outline-link">Read Research Paper &rarr;</a>
       </nav>
@@ -39,6 +41,7 @@
 
   <!-- Hero Section -->
   <section class="hero-section">
+    <img class="hero-bg-image" src="assets/hero_bg.png" alt="" aria-hidden="true">
     <div class="hero-container">
       <div class="hero-glow"></div>
       <div class="badge">Capstone Project Live</div>
@@ -278,6 +281,49 @@
           <li><strong>Tail Query Sparsity:</strong> Low-volume pages (impressions &lt; 250) suffer from high statistical noise, requiring strict heuristic filters before running the scorer.</li>
           <li><strong>Competitor Cannibalization:</strong> Sudden competitor content pushes generate false negatives since external competitive signals aren't captured by internal GSC/GA4 telemetry.</li>
         </ul>
+      </div>
+    </div>
+
+    <!-- Evidence Charts: real exports from the evaluation pipeline -->
+    <div class="section-header" style="margin-top: 48px;">
+      <h3 style="font-family: 'Geist', sans-serif; font-size: 18px;">Evidence Charts (Real Exports)</h3>
+      <p>Pulled directly from <code>scripts/04_evaluate_and_export.py</code> — not mockups. These are the same SVGs referenced above as coefficients and reason codes.</p>
+    </div>
+    <div class="specs-grid">
+      <div class="card">
+        <h3>Top Feature Importance</h3>
+        <img src="assets/top_feature_importance.svg" alt="Bar chart of top feature importance weights from the Random Forest model" style="width: 100%; height: auto; border-radius: 8px;">
+      </div>
+      <div class="card">
+        <h3>Top Reason Codes</h3>
+        <img src="assets/top_reason_codes.svg" alt="Bar chart of top heuristic reason codes behind baseline predictions" style="width: 100%; height: auto; border-radius: 8px;">
+      </div>
+      <div class="card">
+        <h3>Action Mix</h3>
+        <img src="assets/action_mix.svg" alt="Distribution chart of Refresh, Monitor, and Leave Alone recommendations" style="width: 100%; height: auto; border-radius: 8px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: About & Contact -->
+  <section class="section-container" id="about">
+    <div class="section-header">
+      <h2>4. About &amp; Contact</h2>
+      <p>The person behind the model.</p>
+    </div>
+
+    <div class="card about-card">
+      <img class="about-photo" src="assets/saad_photo.jpg" alt="Photo of Saad Ali">
+      <div class="about-body">
+        <h3>Saad Ali</h3>
+        <p class="about-bio">
+          I train and deploy machine learning models that prioritize messy search performance data. I help engineering
+          leads build honest, latency-sensitive prototypes that show exactly where they succeed and where they fail.
+        </p>
+        <div class="about-actions">
+          <a class="btn btn-primary" href="mailto:saadali45.official@gmail.com">Email Me</a>
+          <a class="btn" href="https://github.com/Saadali880/flyrank-ml-internship-saad" target="_blank" rel="noopener">View GitHub Repo</a>
+        </div>
       </div>
     </div>
   </section>
