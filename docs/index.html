@@ -229,6 +229,22 @@
       color: var(--text-primary);
       text-align: center;
     }
+    .portfolio-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1.5px solid var(--accent);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-family: 'Geist Mono', monospace;
+      transition: all 0.2s ease;
+    }
+    .portfolio-link:hover {
+      background-color: var(--accent);
+      color: #ffffff !important;
+      box-shadow: 0 0 10px rgba(13, 148, 136, 0.4);
+    }
   </style>
 </head>
 <body>
@@ -243,10 +259,13 @@
         <div class="monogram">[R]</div>
         <span class="brand-name">Saad Ali — ML Research</span>
       </div>
-      <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
-        <span class="toggle-icon">⚡</span>
-        <span class="toggle-text">Dark Mode</span>
-      </button>
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <a href="portfolio/index.html" class="portfolio-link">Interactive Portfolio &amp; Agent &rarr;</a>
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+          <span class="toggle-icon">⚡</span>
+          <span class="toggle-text">Dark Mode</span>
+        </button>
+      </div>
     </div>
   </header>
 
