@@ -3,335 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saad Ali — Interactive ML Scorer & Portfolio Agent</title>
-  <meta name="description" content="Machine Learning Portfolio of Saad Ali. Live content refresh scorer and autonomous tool-calling AI agent.">
+  <title>Saad Ali — ML & AI Engineering Portfolio</title>
+  <meta name="description" content="Personal website of Saad Ali, ML & AI Engineering Intern at FlyRank. Custom models, search-priority pipelines, and portfolio.">
+  
+  <!-- Modern Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
+  
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
 </head>
 <body>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="toast">Metric copied to clipboard!</div>
+  <!-- Background Glows -->
+  <div class="glow-bg glow-primary"></div>
+  <div class="glow-bg glow-secondary"></div>
 
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="nav-container">
-      <div class="brand">
-        <div class="monogram">[S]</div>
-        <span class="brand-name">Saad Ali</span>
-        <span class="brand-badge">ML &amp; AI Engineering</span>
+  <!-- Main Container -->
+  <main class="container">
+    
+    <!-- Header / Nav -->
+    <header class="header">
+      <div class="monogram">[S]</div>
+      <div class="status-pill">
+        <span class="pulse"></span>
+        <span>Available for Fall 2026 roles</span>
       </div>
-      <nav class="nav-links">
-        <a href="#playground" class="nav-link">Interactive Scorer</a>
-        <a href="#agent-section" class="nav-link">Personal Agent</a>
-        <a href="#specs" class="nav-link">Model Specs</a>
-        <a href="#about" class="nav-link">About &amp; Contact</a>
-        <a href="next_case_study.md" class="nav-link">Growth Plan</a>
-        <a href="../index.html" class="nav-link outline-link">Read Research Paper &rarr;</a>
-      </nav>
-      <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
-        <span class="toggle-icon">⚡</span>
-        <span class="toggle-text">Light Mode</span>
-      </button>
-    </div>
-  </header>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <img class="hero-bg-image" src="assets/hero_bg.png" alt="" aria-hidden="true">
-    <div class="hero-container">
-      <div class="hero-glow"></div>
-      <div class="badge">Capstone Project Live</div>
-      <h1 class="hero-claim">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 class="title">Saad Ali</h1>
+      <p class="role-title">Machine Learning & AI Engineering Intern @ FlyRank</p>
+      
+      <p class="positioning">
         I build search-priority models that score messy, page-level data under clear latency limits, showing engineering leads exactly where the prototype succeeds and fails.
-      </h1>
-      <p class="hero-subtitle">
-        A transparent portfolio demonstrating AI fluency, machine learning optimization, and dynamic agentic integrations.
       </p>
 
-      <!-- Status Dashboard -->
-      <section class="dashboard">
-        <div class="dashboard-header">
-          <div class="status-indicator">
-            <span class="status-pulse"></span>
-            <span class="status-label">SYSTEM STATUS: ALL AGENTS & MODELS OPERATIONAL</span>
+      <!-- Primary Action Links -->
+      <div class="link-grid">
+        <a href="https://www.linkedin.com/in/saadali" target="_blank" rel="noopener" class="link-card linkedin-card">
+          <div class="link-icon">💼</div>
+          <div class="link-info">
+            <span class="link-label">LinkedIn</span>
+            <span class="link-url">connect / chat</span>
           </div>
-          <button class="copy-status-btn" onclick="copyStatus()">Copy Model Metrics</button>
-        </div>
+          <span class="arrow">&rarr;</span>
+        </a>
+
+        <a href="https://github.com/Saadali880" target="_blank" rel="noopener" class="link-card github-card">
+          <div class="link-icon">🐙</div>
+          <div class="link-info">
+            <span class="link-label">GitHub</span>
+            <span class="link-url">Saadali880</span>
+          </div>
+          <span class="arrow">&rarr;</span>
+        </a>
+
+        <a href="assets/Saad_Ali_CV.pdf" target="_blank" class="link-card cv-card">
+          <div class="link-icon">📄</div>
+          <div class="link-info">
+            <span class="link-label">Curriculum Vitae</span>
+            <span class="link-url">view / download cv</span>
+          </div>
+          <span class="arrow">&rarr;</span>
+        </a>
+
+        <a href="https://calendly.com/saadali" target="_blank" rel="noopener" class="link-card booking-card">
+          <div class="link-icon">📅</div>
+          <div class="link-info">
+            <span class="link-label">Book a Call</span>
+            <span class="link-url">calendly/saadali</span>
+          </div>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Current & Capstone Projects -->
+    <section class="section">
+      <h2 class="section-title">Current &amp; Capstone Work</h2>
+      <div class="project-grid">
         
-        <div class="grid-metrics">
-          <div class="metric-card" onclick="copyMetric('Latency Budget', '14ms inference budget limit')">
-            <div class="metric-label">Inference Latency</div>
-            <div class="metric-value">14ms</div>
-            <div class="metric-desc">Sub-millisecond model execution</div>
+        <!-- Live Project: Content Refresh Scorer -->
+        <div class="project-card active-project">
+          <div class="project-badge">ACTIVE PRODUCTION</div>
+          <h3 class="project-name">Content Refresh Opportunity Scorer</h3>
+          <p class="project-desc">
+            An empirical ML pipeline trained on 79M+ rows of search performance data. Built with DuckDB and Scikit-Learn to predict search traffic decay and prioritize refreshes under a strict 14ms inference budget.
+          </p>
+          <div class="project-metrics">
+            <div class="metric">
+              <span class="metric-val">+247%</span>
+              <span class="metric-lbl">Precision@50 Lift</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val">14ms</span>
+              <span class="metric-lbl">Inference Limit</span>
+            </div>
           </div>
+          <a href="https://saadali880.github.io/flyrank-ml-internship-saad/" target="_blank" rel="noopener" class="btn btn-outline">Read Research Paper &rarr;</a>
+        </div>
+
+        <!-- Interactive Playground Widget -->
+        <div class="project-card playground-card">
+          <h3 class="project-name">Run Scorer Inference</h3>
+          <p class="project-desc">Evaluate a mock page below to test our Logistic Regression weights:</p>
           
-          <div class="metric-card" onclick="copyMetric('Precision@50 Lift', '+247% lift over heuristic baseline')">
-            <div class="metric-label">Precision@50 Lift</div>
-            <div class="metric-value">+247%</div>
-            <div class="metric-desc">0.30 baseline to 0.74 model</div>
-          </div>
-
-          <div class="metric-card" onclick="copyMetric('ROC AUC', '0.747 AUC on client holdouts')">
-            <div class="metric-label">Holdout ROC AUC</div>
-            <div class="metric-value">0.747</div>
-            <div class="metric-desc">Evaluated on unseen clients</div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </section>
-
-  <!-- Section: Interactive Scorer Playground -->
-  <section class="section-container" id="playground">
-    <div class="section-header">
-      <h2>1. Live ML Content Scorer</h2>
-      <p>Input GSC and GA4 metrics to run our Logistic Regression model. It blends statistical prediction with baseline staleness factors to classify page health and recommend actions.</p>
-    </div>
-
-    <div class="playground-layout">
-      <!-- Input Panel -->
-      <div class="card card-input">
-        <h3>Page Performance Inputs</h3>
-        <form id="scorer-form" onsubmit="calculateScore(event)">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="impressions">90-Day GSC Impressions</label>
-              <input type="number" id="impressions" value="5000" min="1" required>
-              <span class="help-text">Page organic views</span>
+          <form id="widget-form" class="widget-form" onsubmit="evaluateWidget(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="impressions">90d Impressions</label>
+                <input type="number" id="impressions" value="5000" min="1" required>
+              </div>
+              <div class="form-group">
+                <label for="clicks">90d Clicks</label>
+                <input type="number" id="clicks" value="150" min="0" required>
+              </div>
             </div>
-            
-            <div class="form-group">
-              <label for="clicks">90-Day GSC Clicks</label>
-              <input type="number" id="clicks" value="150" min="0" required>
-              <span class="help-text">Organic traffic clicks</span>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="position">Avg Position</label>
+                <input type="number" id="position" value="12.4" step="0.1" required>
+              </div>
+              <div class="form-group">
+                <label for="age">Age (Days)</label>
+                <input type="number" id="age" value="180" min="1" required>
+              </div>
             </div>
+            <button type="submit" class="btn btn-primary">Score Page</button>
+          </form>
 
-            <div class="form-group">
-              <label for="avg-position">Average Rank Position</label>
-              <input type="number" id="avg-position" value="12.4" min="1" max="100" step="0.1" required>
-              <span class="help-text">Google ranking position (1-100)</span>
+          <div id="widget-result" class="widget-result hidden">
+            <div class="result-header">
+              <span class="result-title">Model Output</span>
+              <span id="result-badge" class="badge">Action</span>
             </div>
-
-            <div class="form-group">
-              <label for="content-age">Content Age (Days)</label>
-              <input type="number" id="content-age" value="180" min="0" required>
-              <span class="help-text">Days since last structural update</span>
-            </div>
-
-            <div class="form-group">
-              <label for="scroll-rate">GA4 Scroll Rate (%)</label>
-              <input type="number" id="scroll-rate" value="45" min="0" max="100" required>
-              <span class="help-text">% users scrolling down 90%+</span>
-            </div>
-
-            <div class="form-group">
-              <label for="word-count">Content Word Count</label>
-              <input type="number" id="word-count" value="950" min="1" required>
-              <span class="help-text">Article length in words</span>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">Run Inference Scorer</button>
-        </form>
-      </div>
-
-      <!-- Result Panel -->
-      <div class="card card-result">
-        <h3>Refresh Priority Score Card</h3>
-        <div class="result-display-grid">
-          <div class="gauge-wrapper">
-            <svg class="gauge" viewBox="0 0 100 100">
-              <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
-              <circle class="gauge-fill" id="gauge-fill-circle" cx="50" cy="50" r="40" style="stroke-dasharray: 0, 251.2;"></circle>
-              <text class="gauge-value" id="gauge-value-text" x="50" y="55">0</text>
-            </svg>
-            <span class="gauge-label">Opportunity Score</span>
-          </div>
-
-          <div class="result-details">
-            <div class="metric-row">
-              <span class="label">Priority Action:</span>
-              <span class="value-badge" id="action-badge">Run Scorer</span>
-            </div>
-            <div class="metric-row">
-              <span class="label">Model Probability:</span>
-              <span class="value" id="res-probability">0.0%</span>
-            </div>
-            <div class="metric-row">
-              <span class="label">Heuristic Score:</span>
-              <span class="value" id="res-heuristic">0/100</span>
-            </div>
-            <div class="reasoning-box">
-              <h4>Reasoning &amp; Action Recommendation</h4>
-              <p id="res-reasoning">Enter metrics and run the scorer to analyze content decay factors.</p>
+            <div class="result-body">
+              <div class="score-container">
+                <span class="score-label">Probability of Decay:</span>
+                <span id="result-score" class="score-value">0.00%</span>
+              </div>
+              <p id="result-reason" class="result-reason"></p>
             </div>
           </div>
         </div>
+
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Section: Interactive Personal Agent Console -->
-  <section class="section-container" id="agent-section">
-    <div class="section-header">
-      <h2>2. Interactive Personal AI Agent</h2>
-      <p>Chat with Saad's Personal Agent. It operates in an autonomous loop: parsing your natural language, calling specific system tools, and logging its internal trace reasoning live in the console.</p>
-    </div>
-
-    <!-- Agent Console Container -->
-    <div class="agent-console">
-      
-      <!-- Left Panel: Chat Interface -->
-      <div class="chat-panel">
-        <div class="panel-header-bar">
-          <div class="agent-identity">
-            <div class="agent-avatar">SA</div>
-            <div>
-              <h3>Saad's Assistant</h3>
-              <span class="agent-role">Personal AI Agent</span>
-            </div>
-          </div>
-          <button class="btn btn-xs btn-outline-danger" onclick="resetAgentChat()">Reset Session</button>
-        </div>
-        
-        <div class="chat-messages-box" id="agent-chat-messages">
-          <!-- Populated dynamically -->
+    <!-- Future Space / Blog -->
+    <section class="section">
+      <h2 class="section-title">Future Posts &amp; Research</h2>
+      <div class="future-grid">
+        <div class="future-card">
+          <span class="future-date">Coming August 2026</span>
+          <h3 class="future-title">Addressing Low-Volume Sparsity in Search Telemetry</h3>
+          <p class="future-desc">An investigation into applying Bayesian smoothing to pages with impressions under 250 to prevent false-positive content refresh recommendations.</p>
         </div>
 
-        <div class="quick-replies-container" id="agent-quick-replies">
-          <!-- Populated dynamically -->
-        </div>
-
-        <div class="chat-input-area">
-          <input type="text" id="agent-chat-input" placeholder="Ask about Saad's skills, model specs, or score a page..." onkeydown="if(event.key === 'Enter') sendAgentMessage()">
-          <button class="btn btn-primary btn-icon-only" onclick="sendAgentMessage()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-          </button>
+        <div class="future-card">
+          <span class="future-date">Coming September 2026</span>
+          <h3 class="future-title">Deploying ML Models via DuckDB and WebAssembly</h3>
+          <p class="future-desc">A deep dive into migrating scikit-learn coefficients directly into browser-side execution for zero-latency user interfaces.</p>
         </div>
       </div>
+    </section>
 
-      <!-- Right Panel: Agent Internal Trace Logger -->
-      <div class="trace-panel">
-        <div class="panel-header-bar">
-          <span class="terminal-title">Agent Execution Trace Logs</span>
-          <span class="pulse-badge"><span class="status-pulse green"></span>Agent Engine Active</span>
-        </div>
-        <div class="terminal-body" id="agent-trace-logs">
-          <!-- Terminal logs populated dynamically -->
-        </div>
-      </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2026 Saad Ali. Built for the FlyRank AI Internship.</p>
+      <p class="footer-links">
+        <a href="https://github.com/Saadali880" target="_blank" rel="noopener">GitHub</a> &middot; 
+        <a href="https://www.linkedin.com/in/saadali" target="_blank" rel="noopener">LinkedIn</a> &middot;
+        <a href="dns_walkthrough.md" target="_blank">DNS Walkthrough</a>
+      </p>
+    </footer>
 
-    </div>
-  </section>
-
-  <!-- Section: Technical Specifications -->
-  <section class="section-container" id="specs">
-    <div class="section-header">
-      <h2>3. Technical Specifications</h2>
-      <p>The model architecture, features, coefficients, and security constraints built into Saad's Content Refresh Scorer.</p>
-    </div>
-
-    <div class="specs-grid">
-      <!-- Card: Feature Coefficients -->
-      <div class="card">
-        <h3>Model Coefficients (Logistic Regression)</h3>
-        <p class="card-intro">Positive coefficients increase refresh urgency; negative ones suggest traffic stability (evergreen survival bias).</p>
-        <div class="coef-list">
-          <div class="coef-item">
-            <span class="coef-feature">log_impressions_90d (Visibility Volume)</span>
-            <span class="coef-val positive">+1.27</span>
-          </div>
-          <div class="coef-item">
-            <span class="coef-feature">avg_position (Ranking Depth)</span>
-            <span class="coef-val negative">-0.40</span>
-          </div>
-          <div class="coef-item">
-            <span class="coef-feature">content_age_days (Time Since Refresh)</span>
-            <span class="coef-val negative">-0.37</span>
-          </div>
-          <div class="coef-item">
-            <span class="coef-feature">log_clicks_90d (Organic Traffic Clicks)</span>
-            <span class="coef-val negative">-0.56</span>
-          </div>
-          <div class="coef-item">
-            <span class="coef-feature">users_90d (Telemetry Active Audience)</span>
-            <span class="coef-val negative">-0.83</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card: Data Safety -->
-      <div class="card">
-        <h3>Data Safety &amp; Leakage Protections</h3>
-        <ul class="specs-list">
-          <li><strong>Zero Client Leakage:</strong> Client IDs and Page IDs are completely hashed/pseudonymized and kept strictly as metadata grouping variables, never as model features.</li>
-          <li><strong>Label Leakage Exclusions:</strong> Explicit outcome trends like <code>trend_direction</code> and <code>trend_pct</code> were dropped entirely to prevent models from memorizing outcome markers.</li>
-          <li><strong>Group-Based Splitting:</strong> The validation pipeline splits train/test data based on <code>client_id</code>, ensuring that the model is tested on clients it has never seen before, mirroring production rollouts.</li>
-        </ul>
-      </div>
-
-      <!-- Card: Model Constraints -->
-      <div class="card">
-        <h3>Limitations &amp; Failures Modes</h3>
-        <ul class="specs-list">
-          <li><strong>Stability Paradox:</strong> Highly visible evergreen pages with large room to fall generate false positive refresh triggers, even when search intent is stable.</li>
-          <li><strong>Tail Query Sparsity:</strong> Low-volume pages (impressions &lt; 250) suffer from high statistical noise, requiring strict heuristic filters before running the scorer.</li>
-          <li><strong>Competitor Cannibalization:</strong> Sudden competitor content pushes generate false negatives since external competitive signals aren't captured by internal GSC/GA4 telemetry.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Evidence Charts: real exports from the evaluation pipeline -->
-    <div class="section-header" style="margin-top: 48px;">
-      <h3 style="font-family: 'Geist', sans-serif; font-size: 18px;">Evidence Charts (Real Exports)</h3>
-      <p>Pulled directly from <code>scripts/04_evaluate_and_export.py</code> — not mockups. These are the same SVGs referenced above as coefficients and reason codes.</p>
-    </div>
-    <div class="specs-grid">
-      <div class="card">
-        <h3>Top Feature Importance</h3>
-        <img src="assets/top_feature_importance.svg" alt="Bar chart of top feature importance weights from the Random Forest model" style="width: 100%; height: auto; border-radius: 8px;">
-      </div>
-      <div class="card">
-        <h3>Top Reason Codes</h3>
-        <img src="assets/top_reason_codes.svg" alt="Bar chart of top heuristic reason codes behind baseline predictions" style="width: 100%; height: auto; border-radius: 8px;">
-      </div>
-      <div class="card">
-        <h3>Action Mix</h3>
-        <img src="assets/action_mix.svg" alt="Distribution chart of Refresh, Monitor, and Leave Alone recommendations" style="width: 100%; height: auto; border-radius: 8px;">
-      </div>
-    </div>
-  </section>
-
-  <!-- Section: About & Contact -->
-  <section class="section-container" id="about">
-    <div class="section-header">
-      <h2>4. About &amp; Contact</h2>
-      <p>The person behind the model.</p>
-    </div>
-
-    <div class="card about-card">
-      <img class="about-photo" src="assets/saad_photo.jpg" alt="Photo of Saad Ali">
-      <div class="about-body">
-        <h3>Saad Ali</h3>
-        <p class="about-bio">
-          I train and deploy machine learning models that prioritize messy search performance data. I help engineering
-          leads build honest, latency-sensitive prototypes that show exactly where they succeed and where they fail.
-        </p>
-        <div class="about-actions">
-          <a class="btn btn-primary" href="mailto:saadali45.official@gmail.com">Email Me</a>
-          <a class="btn" href="https://github.com/Saadali880/flyrank-ml-internship-saad" target="_blank" rel="noopener">View GitHub Repo</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <p>Saad Ali &copy; 2026 · AI Fluency Track · FlyRank AI Internship · <a href="next_case_study.md" style="color: var(--accent); text-decoration: none;">Growth Plan</a></p>
-  </footer>
+  </main>
 
   <script src="app.js"></script>
 </body>
