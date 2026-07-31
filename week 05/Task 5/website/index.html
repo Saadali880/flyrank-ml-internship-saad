@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saad Ali — ML & AI Engineering Portfolio</title>
+  <meta name="description" content="Personal website of Saad Ali, ML & AI Engineering Intern at FlyRank. Custom models, search-priority pipelines, and portfolio.">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+
+  <!-- Background Glows -->
+  <div class="glow-bg glow-primary"></div>
+  <div class="glow-bg glow-secondary"></div>
+
+  <!-- Main Container -->
+  <main class="container">
+    
+    <!-- Header / Nav -->
+    <header class="header">
+      <div class="monogram">[S]</div>
+      <div class="status-pill">
+        <span class="pulse"></span>
+        <span>Available for Fall 2026 roles</span>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 class="title">Saad Ali</h1>
+      <p class="role-title">Machine Learning & AI Engineering Intern @ FlyRank</p>
+      
+      <p class="positioning">
+        I build search-priority models that score messy, page-level data under clear latency limits, showing engineering leads exactly where the prototype succeeds and fails.
+      </p>
+
+      <!-- Primary Action Links -->
+      <div class="link-grid">
+        <a href="https://www.linkedin.com/in/saadali" target="_blank" rel="noopener" class="link-card linkedin-card">
+          <div class="link-icon">💼</div>
+          <div class="link-info">
+            <span class="link-label">LinkedIn</span>
+            <span class="link-url">connect / chat</span>
+          </div>
+          <span class="arrow">&rarr;</span>
+        </a>
+
+        <a href="https://github.com/Saadali880" target="_blank" rel="noopener" class="link-card github-card">
+          <div class="link-icon">🐙</div>
+          <div class="link-info">
+            <span class="link-label">GitHub</span>
+            <span class="link-url">Saadali880</span>
+          </div>
+          <span class="arrow">&rarr;</span>
+        </a>
+
+        <a href="assets/Saad_Ali_CV.pdf" target="_blank" class="link-card cv-card">
+          <div class="link-icon">📄</div>
+          <div class="link-info">
+            <span class="link-label">Curriculum Vitae</span>
+            <span class="link-url">view / download cv</span>
+          </div>
+          <span class="arrow">&rarr;</span>
+        </a>
+
+        <a href="https://calendly.com/saadali" target="_blank" rel="noopener" class="link-card booking-card">
+          <div class="link-icon">📅</div>
+          <div class="link-info">
+            <span class="link-label">Book a Call</span>
+            <span class="link-url">calendly/saadali</span>
+          </div>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Current & Capstone Projects -->
+    <section class="section">
+      <h2 class="section-title">Current &amp; Capstone Work</h2>
+      <div class="project-grid">
+        
+        <!-- Live Project: Content Refresh Scorer -->
+        <div class="project-card active-project">
+          <div class="project-badge">ACTIVE PRODUCTION</div>
+          <h3 class="project-name">Content Refresh Opportunity Scorer</h3>
+          <p class="project-desc">
+            An empirical ML pipeline trained on 79M+ rows of search performance data. Built with DuckDB and Scikit-Learn to predict search traffic decay and prioritize refreshes under a strict 14ms inference budget.
+          </p>
+          <div class="project-metrics">
+            <div class="metric">
+              <span class="metric-val">+247%</span>
+              <span class="metric-lbl">Precision@50 Lift</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val">14ms</span>
+              <span class="metric-lbl">Inference Limit</span>
+            </div>
+          </div>
+          <a href="https://saadali880.github.io/flyrank-ml-internship-saad/" target="_blank" rel="noopener" class="btn btn-outline">Read Research Paper &rarr;</a>
+        </div>
+
+        <!-- Interactive Playground Widget -->
+        <div class="project-card playground-card">
+          <h3 class="project-name">Run Scorer Inference</h3>
+          <p class="project-desc">Evaluate a mock page below to test our Logistic Regression weights:</p>
+          
+          <form id="widget-form" class="widget-form" onsubmit="evaluateWidget(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="impressions">90d Impressions</label>
+                <input type="number" id="impressions" value="5000" min="1" required>
+              </div>
+              <div class="form-group">
+                <label for="clicks">90d Clicks</label>
+                <input type="number" id="clicks" value="150" min="0" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="position">Avg Position</label>
+                <input type="number" id="position" value="12.4" step="0.1" required>
+              </div>
+              <div class="form-group">
+                <label for="age">Age (Days)</label>
+                <input type="number" id="age" value="180" min="1" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Score Page</button>
+          </form>
+
+          <div id="widget-result" class="widget-result hidden">
+            <div class="result-header">
+              <span class="result-title">Model Output</span>
+              <span id="result-badge" class="badge">Action</span>
+            </div>
+            <div class="result-body">
+              <div class="score-container">
+                <span class="score-label">Probability of Decay:</span>
+                <span id="result-score" class="score-value">0.00%</span>
+              </div>
+              <p id="result-reason" class="result-reason"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Future Space / Blog -->
+    <section class="section">
+      <h2 class="section-title">Future Posts &amp; Research</h2>
+      <div class="future-grid">
+        <div class="future-card">
+          <span class="future-date">Coming August 2026</span>
+          <h3 class="future-title">Addressing Low-Volume Sparsity in Search Telemetry</h3>
+          <p class="future-desc">An investigation into applying Bayesian smoothing to pages with impressions under 250 to prevent false-positive content refresh recommendations.</p>
+        </div>
+
+        <div class="future-card">
+          <span class="future-date">Coming September 2026</span>
+          <h3 class="future-title">Deploying ML Models via DuckDB and WebAssembly</h3>
+          <p class="future-desc">A deep dive into migrating scikit-learn coefficients directly into browser-side execution for zero-latency user interfaces.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2026 Saad Ali. Built for the FlyRank AI Internship.</p>
+      <p class="footer-links">
+        <a href="https://github.com/Saadali880" target="_blank" rel="noopener">GitHub</a> &middot; 
+        <a href="https://www.linkedin.com/in/saadali" target="_blank" rel="noopener">LinkedIn</a> &middot;
+        <a href="dns_walkthrough.md" target="_blank">DNS Walkthrough</a>
+      </p>
+    </footer>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
