@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNS Walkthrough — Saad Ali</title>
+  <meta name="description" content="A detailed walkthrough for mapping a custom FlyRank subdomain to a personal site on Netlify.">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <style>
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      transition: var(--transition-smooth);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      padding: 6px 14px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.03);
+    }
+    .back-btn:hover {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: var(--accent-primary);
+      transform: translateX(-2px);
+    }
+    .step-card {
+      margin-bottom: 24px;
+    }
+    .step-num-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      color: var(--accent-primary);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .analogy-box {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid var(--accent-secondary);
+      padding: 16px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 16px;
+    }
+    .analogy-title {
+      font-family: var(--font-mono);
+      color: var(--accent-secondary);
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .dns-lifecycle {
+      position: relative;
+      padding-left: 24px;
+      border-left: 1px dashed var(--border-color-hover);
+      margin-top: 20px;
+    }
+    .dns-step {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .dns-step::before {
+      content: '';
+      position: absolute;
+      left: -29px;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-secondary);
+      border: 2px solid var(--bg-base);
+    }
+    .dns-step.active::before {
+      background: var(--accent-primary);
+      box-shadow: 0 0 8px var(--accent-primary);
+    }
+    .dns-step h4 {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .dns-step p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .dns-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+    .dns-table th, .dns-table td {
+      border: 1px solid var(--border-color);
+      padding: 10px;
+      text-align: left;
+    }
+    .dns-table th {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-primary);
+    }
+    .dns-table td {
+      color: var(--text-secondary);
+    }
+    .dns-table tr:hover td {
+      background: rgba(255, 255, 255, 0.01);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Glows -->
+  <div class="glow-bg glow-primary"></div>
+  <div class="glow-bg glow-secondary"></div>
+
+  <!-- Main Container -->
+  <main class="container">
+    
+    <!-- Header / Nav -->
+    <header class="header">
+      <div class="monogram">[S]</div>
+      <a href="index.html" class="back-btn">&larr; Back to Portfolio</a>
+    </header>
+
+    <!-- Content Section -->
+    <section class="hero" style="margin-bottom: 40px;">
+      <h1 class="title" style="font-size: 36px; line-height: 1.2;">Subdomain Mapping</h1>
+      <p class="role-title">DNS Configuration & CNAME Resolution Lifecycle</p>
+      <p class="positioning" style="font-size: 16px; margin-bottom: 0;">
+        This walkthrough details the steps and technical explanation for pointing a custom FlyRank subdomain (<code>saadali.flyrank.ai</code>) to my personal portfolio hosted on Netlify (<code>saadali.netlify.app</code>).
+      </p>
+    </section>
+
+    <!-- Section 1: CNAME -->
+    <section class="section">
+      <div class="card step-card">
+        <span class="step-num-badge">Concept 1</span>
+        <h3 class="project-name" style="margin-bottom: 12px;">What is a CNAME Record?</h3>
+        <p class="project-desc">
+          A <strong>CNAME (Canonical Name)</strong> record is a type of DNS record that acts as an <strong>alias</strong> or a "nickname" pointing one domain name to another domain name, rather than pointing directly to a numeric IP address.
+        </p>
+        
+        <div class="analogy-box">
+          <div class="analogy-title">📞 The Phonebook Analogy:</div>
+          <p class="project-desc" style="font-size: 14px; margin-bottom: 8px;">
+            Think of an <strong>A record</strong> (Address record) like a phonebook entry mapping a name directly to a phone number:
+          </p>
+          <code style="display:block; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 4px; font-size: 13px; margin-bottom: 8px; color: var(--text-primary);">Saad Ali &rarr; +1 (555) 019-9234</code>
+          <p class="project-desc" style="font-size: 14px; margin-bottom: 8px;">
+            A <strong>CNAME record</strong> is like mapping an alias to a name that already has a phone number associated with it:
+          </p>
+          <code style="display:block; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 4px; font-size: 13px; color: var(--text-primary);">Developer Saad &rarr; Alias of "Saad Ali" (which resolves to the number)</code>
+        </div>
+        <p class="project-desc" style="margin-top: 14px; font-size: 14px;">
+          <strong>Why use a CNAME?</strong> If the IP address of the hosting server changes, only the target domain (<code>saadali.netlify.app</code>) needs to update its A record. The alias subdomain (<code>saadali.flyrank.ai</code>) continues to resolve perfectly without any updates.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 2: Values -->
+    <section class="section">
+      <div class="card step-card">
+        <span class="step-num-badge">Concept 2</span>
+        <h3 class="project-name" style="margin-bottom: 12px;">Subdomain Record Details</h3>
+        <p class="project-desc">
+          Once provisioned at the end of the internship track, the CNAME record is configured in the domain zone file with the following settings:
+        </p>
+        <table class="dns-table">
+          <thead>
+            <tr>
+              <th>Host (Subdomain)</th>
+              <th>Type</th>
+              <th>Value (Destination)</th>
+              <th>TTL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>saadali.flyrank.ai</code></td>
+              <td><code>CNAME</code></td>
+              <td><code>saadali.netlify.app</code></td>
+              <td><code>3600 (1 Hour)</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="project-desc" style="margin-top: 12px; font-size: 14px;">
+          This record maps the custom FlyRank-branded subdomain directly to the production Netlify deployment server.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: Lifecycle -->
+    <section class="section">
+      <div class="card step-card">
+        <span class="step-num-badge">Concept 3</span>
+        <h3 class="project-name" style="margin-bottom: 12px;">DNS Resolution Lifecycle (Step-by-Step)</h3>
+        <p class="project-desc">
+          Below is what occurs behind the scenes in the ~100ms interval between a user requesting <code>saadali.flyrank.ai</code> and the portfolio loading in the browser:
+        </p>
+        
+        <div class="dns-lifecycle">
+          <div class="dns-step">
+            <h4>1. The Request (Browser)</h4>
+            <p>You enter <code>saadali.flyrank.ai</code> in your browser. The browser queries your local network's <strong>DNS Resolver</strong> (ISP or public resolver like 8.8.8.8).</p>
+          </div>
+          <div class="dns-step">
+            <h4>2. The Root Nameserver</h4>
+            <p>The Resolver queries the Root Nameserver (<code>.</code>), which directs the Resolver to the <code>.ai</code> Top-Level Domain (TLD) Nameserver.</p>
+          </div>
+          <div class="dns-step">
+            <h4>3. The TLD Nameserver</h4>
+            <p>The Resolver queries the <code>.ai</code> TLD server, which returns the Authoritative Nameservers configured for the <code>flyrank.ai</code> domain.</p>
+          </div>
+          <div class="dns-step">
+            <h4>4. The Authoritative Nameserver</h4>
+            <p>The Resolver queries the <code>flyrank.ai</code> Authoritative Nameserver. It checks the zone records and returns: <em>"saadali.flyrank.ai is a CNAME alias pointing to saadali.netlify.app."</em></p>
+          </div>
+          <div class="dns-step">
+            <h4>5. The Redirection (Netlify DNS)</h4>
+            <p>The Resolver then contacts Netlify's Authoritative Nameservers to find the IP address of <code>saadali.netlify.app</code>, which returns the active server IP (e.g., <code>104.198.14.32</code>).</p>
+          </div>
+          <div class="dns-step active">
+            <h4>6. Connection established</h4>
+            <p>The Resolver returns the target IP address to the browser. The browser opens a secure HTTPS connection to Netlify's server, which serves the webpage files immediately.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2026 Saad Ali. Built for the FlyRank AI Internship.</p>
+      <p class="footer-links">
+        <a href="index.html">Portfolio</a> &middot;
+        <a href="https://github.com/Saadali880" target="_blank" rel="noopener">GitHub</a> &middot; 
+        <a href="https://www.linkedin.com/in/saad-ali-3007a1333" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </footer>
+
+  </main>
+
+</body>
+</html>

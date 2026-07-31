@@ -17,7 +17,7 @@
   
   --text-primary: #f3f4f6;
   --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
+  --text-muted: #8e98a8;
   
   /* Fonts */
   --font-sans: 'Geist', 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -393,19 +393,24 @@ body {
 
 .form-group input {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 6px;
   padding: 8px 12px;
   color: var(--text-primary);
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 16px; /* Prevents iOS auto-zoom on focus */
   transition: var(--transition-smooth);
+}
+
+.form-group input:hover {
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 .form-group input:focus {
   outline: none;
   border-color: var(--accent-secondary);
   background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
 }
 
 /* Buttons */
@@ -605,5 +610,34 @@ body {
   
   .title {
     font-size: 36px;
+  }
+}
+
+@media (max-width: 500px) {
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 24px 16px;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .status-pill {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+  
+  .positioning {
+    font-size: 16px;
+    margin-bottom: 24px;
   }
 }

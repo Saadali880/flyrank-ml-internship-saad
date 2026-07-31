@@ -393,7 +393,7 @@ body {
 
 .form-group input {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 6px;
   padding: 8px 12px;
   color: var(--text-primary);
@@ -403,7 +403,7 @@ body {
 }
 
 .form-group input:hover {
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 .form-group input:focus {
