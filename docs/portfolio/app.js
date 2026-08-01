@@ -15,8 +15,76 @@ const DEFAULT_SCROLL_RATE = 55;
 const DEFAULT_WORD_COUNT = 1400;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Optional page load animations or initialization
   console.log("Saad Ali Portfolio Loaded.");
+  
+  // Contact Form Submission Handler
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      
+      const submitBtn = document.getElementById('contact-submit-btn');
+      const resultContainer = document.getElementById('contact-result');
+      const feedbackText = document.getElementById('contact-message-feedback');
+      const statusBadge = document.getElementById('contact-badge');
+      
+      // Update UI to show sending status
+      resultContainer.classList.remove('hidden');
+      statusBadge.className = 'badge badge-sending';
+      statusBadge.textContent = '⚡ SENDING...';
+      feedbackText.textContent = 'Connecting to backend API gateway and verifying credentials...';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const formData = new FormData(contactForm);
+      
+      // Verify access key placeholder
+      const accessKey = formData.get('access_key');
+      if (accessKey === 'YOUR_ACCESS_KEY_HERE') {
+        // Fallback for visual mock testing when access key is not set
+        setTimeout(() => {
+          statusBadge.className = 'badge badge-success';
+          statusBadge.textContent = '✅ SUCCESS (MOCK)';
+          feedbackText.textContent = 'Developer Mode: Form submitted successfully! (Note: Replace "YOUR_ACCESS_KEY_HERE" in index.html with a real Web3Forms key to route messages to your real inbox).';
+          contactForm.reset();
+          submitBtn.textContent = 'Message Sent';
+        }, 1200);
+        return;
+      }
+
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: json
+      })
+      .then(async (response) => {
+        const data = await response.json();
+        if (response.ok || data.success) {
+          statusBadge.className = 'badge badge-success';
+          statusBadge.textContent = '✅ SUCCESS';
+          feedbackText.textContent = 'Your message has been processed by the backend and sent directly to my email address. Thank you!';
+          contactForm.reset();
+          submitBtn.textContent = 'Message Sent';
+        } else {
+          throw new Error(data.message || 'Web3Forms API refused the submission.');
+        }
+      })
+      .catch((error) => {
+        console.error("Web3Forms Formspree submission error:", error);
+        statusBadge.className = 'badge badge-error';
+        statusBadge.textContent = '❌ ERROR';
+        feedbackText.textContent = `Transmission failed: ${error.message || 'Please check your internet connection and try again.'}`;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      });
+    });
+  }
 });
 
 function evaluateWidget(event) {

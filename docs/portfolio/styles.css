@@ -588,6 +588,51 @@ body {
   color: var(--text-primary);
 }
 
+/* Contact Form Styling */
+.contact-card {
+  width: 100%;
+}
+
+.form-group textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  resize: vertical;
+  transition: var(--transition-smooth);
+}
+
+.form-group textarea:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-secondary);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+}
+
+/* Form Submission State Colors */
+.badge-success {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--accent-primary);
+}
+
+.badge-error {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--accent-danger);
+}
+
+.badge-sending {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--accent-secondary);
+}
+
 /* Responsive Media Queries */
 @media (max-width: 768px) {
   .link-grid {

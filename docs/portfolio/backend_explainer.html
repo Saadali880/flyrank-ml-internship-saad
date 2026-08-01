@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backend Explainer — Saad Ali</title>
+  <meta name="description" content="A plain-words explanation of what a backend is, how the contact form works, and how the data flows.">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <style>
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      transition: var(--transition-smooth);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      padding: 6px 14px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.03);
+    }
+    .back-btn:hover {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: var(--accent-primary);
+      transform: translateX(-2px);
+    }
+    .step-card {
+      margin-bottom: 24px;
+    }
+    .step-num-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      color: var(--accent-primary);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .analogy-box {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid var(--accent-secondary);
+      padding: 16px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 16px;
+    }
+    .analogy-title {
+      font-family: var(--font-mono);
+      color: var(--accent-secondary);
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .dns-lifecycle {
+      position: relative;
+      padding-left: 24px;
+      border-left: 1px dashed var(--border-color-hover);
+      margin-top: 20px;
+    }
+    .dns-step {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .dns-step::before {
+      content: '';
+      position: absolute;
+      left: -29px;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-secondary);
+      border: 2px solid var(--bg-base);
+    }
+    .dns-step.active::before {
+      background: var(--accent-primary);
+      box-shadow: 0 0 8px var(--accent-primary);
+    }
+    .dns-step h4 {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .dns-step p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Glows -->
+  <div class="glow-bg glow-primary"></div>
+  <div class="glow-bg glow-secondary"></div>
+
+  <!-- Main Container -->
+  <main class="container">
+    
+    <!-- Header / Nav -->
+    <header class="header">
+      <div class="monogram">[S]</div>
+      <a href="index.html" class="back-btn">&larr; Back to Portfolio</a>
+    </header>
+
+    <!-- Content Section -->
+    <section class="hero" style="margin-bottom: 40px;">
+      <h1 class="title" style="font-size: 36px; line-height: 1.2;">Backend Architecture</h1>
+      <p class="role-title">Plain-Words Explainer &amp; Form Data Flow</p>
+      <p class="positioning" style="font-size: 16px; margin-bottom: 0;">
+        This document explains what a backend is, what my contact form feature accomplishes, and outlines the lifecycle of form data as it travels across the internet to my inbox.
+      </p>
+    </section>
+
+    <!-- Section 1: What is a Backend -->
+    <section class="section">
+      <div class="card step-card">
+        <span class="step-num-badge">Concept 1</span>
+        <h3 class="project-name" style="margin-bottom: 12px;">What is a Backend?</h3>
+        <p class="project-desc">
+          In web applications, the <strong>Frontend (client-side)</strong> refers to everything a user runs and interacts with directly inside their web browser (HTML layouts, CSS styles, and client JavaScript).
+        </p>
+        <p class="project-desc">
+          The <strong>Backend (server-side)</strong> is the behind-the-scenes engine running on remote cloud servers. It manages data operations, database queries, emails, file storage, and security protocols.
+        </p>
+        
+        <div class="analogy-box">
+          <div class="analogy-title">🍽️ The Restaurant Analogy:</div>
+          <p class="project-desc" style="font-size: 14px; margin-bottom: 8px;">
+            Think of the <strong>Frontend</strong> like the restaurant's dining area—the menus, plates, tables, and friendly waiters you see.
+          </p>
+          <p class="project-desc" style="font-size: 14px; margin-bottom: 0;">
+            The <strong>Backend</strong> is the kitchen in the back. Customers can't see inside, but it's where the ingredients are retrieved from the pantry, the recipes are calculated, the food is prepared, and orders are completed securely.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: What our feature does -->
+    <section class="section">
+      <div class="card step-card">
+        <span class="step-num-badge">Concept 2</span>
+        <h3 class="project-name" style="margin-bottom: 12px;">What the Contact Feature Does</h3>
+        <p class="project-desc">
+          A traditional contact button uses a <code>mailto:</code> link, which opens a local desktop email client. This is high-friction and often fails if the user doesn't have an email app installed (like Outlook or Apple Mail).
+        </p>
+        <p class="project-desc">
+          My portfolio contact form enables users to type a message and submit it directly on the page. It intercepts the submission via JavaScript, sends it asynchronously to a remote API backend (Web3Forms), validates it, and forwards it directly to my personal email inbox within seconds—resulting in a seamless, zero-refresh experience.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: Data Flow Lifecycle -->
+    <section class="section">
+      <div class="card step-card">
+        <span class="step-num-badge">Concept 3</span>
+        <h3 class="project-name" style="margin-bottom: 12px;">The 6-Step Data Flow Lifecycle</h3>
+        <p class="project-desc">
+          Here is exactly how the data flows from the browser input fields to my email inbox when a user hits "Send Message":
+        </p>
+        
+        <div class="dns-lifecycle">
+          <div class="dns-step">
+            <h4>1. User Input &amp; Validation (Client Browser)</h4>
+            <p>The visitor fills out the Name, Email, and Message inputs on the page. Browsers execute initial checks to ensure fields are filled and form formats are correct.</p>
+          </div>
+          <div class="dns-step">
+            <h4>2. Submission Intercept (Client JS)</h4>
+            <p>When the user clicks "Send Message," client-side JavaScript (<code>app.js</code>) intercepts the event. It prevents the default browser refresh, disables the button, and shows a "⚡ SENDING..." status.</p>
+          </div>
+          <div class="dns-step">
+            <h4>3. Payload Transit (HTTPS POST)</h4>
+            <p>The script serializes the text inputs into a structured JSON string. It uses the browser's <code>fetch()</code> API to transmit an asynchronous HTTP POST request to Web3Forms' secure endpoint (<code>https://api.web3forms.com/submit</code>).</p>
+          </div>
+          <div class="dns-step">
+            <h4>4. Security &amp; Credentials (Backend Server)</h4>
+            <p>Web3Forms receives the request. It scans for spam (checking that the hidden "honeypot" input field remains empty), extracts the encrypted Access Key, and maps it to my registered email address.</p>
+          </div>
+          <div class="dns-step">
+            <h4>5. Inbox Dispatch (SMTP Route)</h4>
+            <p>The backend compiles the message into an email format and uses SMTP (Simple Mail Transfer Protocol) servers to send it across the internet, dropping it directly into my inbox.</p>
+          </div>
+          <div class="dns-step active">
+            <h4>6. UI Response &amp; Loop Close (Client Browser)</h4>
+            <p>The backend server responds with a <code>200 OK</code> status back to my webpage. The JavaScript receives this response, resets the form input fields, and plays a success animation showing "✅ SUCCESS."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2026 Saad Ali. Built for the FlyRank AI Internship.</p>
+      <p class="footer-links">
+        <a href="index.html">Portfolio</a> &middot;
+        <a href="https://github.com/Saadali880" target="_blank" rel="noopener">GitHub</a> &middot; 
+        <a href="https://www.linkedin.com/in/saad-ali-3007a1333" target="_blank" rel="noopener">LinkedIn</a> &middot;
+        <a href="dns_walkthrough.html" target="_blank">DNS Walkthrough</a>
+      </p>
+    </footer>
+
+  </main>
+
+</body>
+</html>
