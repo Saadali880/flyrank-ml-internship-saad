@@ -686,3 +686,49 @@ body {
     margin-bottom: 24px;
   }
 }
+
+/* FlyRank Graduate Badge */
+.flyrank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 8px;
+  padding: 8px 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-family: 'Geist Mono', 'Manrope', sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.flyrank-badge:hover {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+}
+
+.flyrank-badge .badge-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.flyrank-badge .badge-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.flyrank-badge .badge-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #34D399; /* Mint accent */
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.flyrank-badge .badge-status {
+  font-size: 9px;
+  color: #94a3b8;
+}
