@@ -20,14 +20,53 @@ document.addEventListener('DOMContentLoaded', () => {
   // Contact Form Submission Handler
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
+    let isSubmitting = false;
+
     contactForm.addEventListener('submit', (event) => {
       event.preventDefault();
+      
+      if (isSubmitting) return;
+      isSubmitting = true;
       
       const submitBtn = document.getElementById('contact-submit-btn');
       const resultContainer = document.getElementById('contact-result');
       const feedbackText = document.getElementById('contact-message-feedback');
       const statusBadge = document.getElementById('contact-badge');
       
+      const formData = new FormData(contactForm);
+      const name = (formData.get('name') || '').trim();
+      const email = (formData.get('email') || '').trim();
+      const message = (formData.get('message') || '').trim();
+
+      const resetCooldown = (success) => {
+        if (success) {
+          // Success cooldown of 5 seconds to let user read confirmation, then restore form
+          setTimeout(() => {
+            isSubmitting = false;
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+            statusBadge.className = 'badge';
+            statusBadge.textContent = 'Idle';
+            resultContainer.classList.add('hidden');
+          }, 5000);
+        } else {
+          // Immediate reset on error to allow retry
+          isSubmitting = false;
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Message';
+        }
+      };
+
+      // Inline whitespace check
+      if (!name || !email || !message) {
+        resultContainer.classList.remove('hidden');
+        statusBadge.className = 'badge badge-error';
+        statusBadge.textContent = '❌ VALIDATION ERROR';
+        feedbackText.textContent = 'Submission rejected: Fields cannot be empty or consist only of whitespace.';
+        isSubmitting = false;
+        return;
+      }
+
       // Update UI to show sending status
       resultContainer.classList.remove('hidden');
       statusBadge.className = 'badge badge-sending';
@@ -36,8 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
 
-      const formData = new FormData(contactForm);
-      
       // Verify access key placeholder
       const accessKey = formData.get('access_key');
       if (accessKey === 'YOUR_ACCESS_KEY_HERE') {
@@ -48,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
           feedbackText.textContent = 'Developer Mode: Form submitted successfully! (Note: Replace "YOUR_ACCESS_KEY_HERE" in index.html with a real Web3Forms key to route messages to your real inbox).';
           contactForm.reset();
           submitBtn.textContent = 'Message Sent';
+          resetCooldown(true);
         }, 1200);
         return;
       }
@@ -71,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
           feedbackText.textContent = 'Your message has been processed by the backend and sent directly to my email address. Thank you!';
           contactForm.reset();
           submitBtn.textContent = 'Message Sent';
+          resetCooldown(true);
         } else {
           throw new Error(data.message || 'Web3Forms API refused the submission.');
         }
@@ -80,49 +119,102 @@ document.addEventListener('DOMContentLoaded', () => {
         statusBadge.className = 'badge badge-error';
         statusBadge.textContent = '❌ ERROR';
         feedbackText.textContent = `Transmission failed: ${error.message || 'Please check your internet connection and try again.'}`;
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
+        resetCooldown(false);
       });
     });
   }
 });
 
+function showWidgetError(message) {
+  const errorContainer = document.getElementById('widget-error');
+  if (errorContainer) {
+    errorContainer.textContent = `⚠️ Error: ${message}`;
+    errorContainer.classList.remove('hidden');
+  }
+}
+
 function evaluateWidget(event) {
   event.preventDefault();
 
-  // 1. Gather Form Values
-  const impressions = parseFloat(document.getElementById('impressions').value);
-  const clicks = parseFloat(document.getElementById('clicks').value);
-  const avgPosition = parseFloat(document.getElementById('position').value);
-  const contentAge = parseFloat(document.getElementById('age').value);
+  const errorContainer = document.getElementById('widget-error');
+  const resultContainer = document.getElementById('widget-result');
+
+  if (errorContainer) errorContainer.classList.add('hidden');
+  if (resultContainer) resultContainer.classList.add('hidden');
+
+  // 1. Gather and Trim Form Values
+  const impressionsInput = document.getElementById('impressions').value.trim();
+  const clicksInput = document.getElementById('clicks').value.trim();
+  const positionInput = document.getElementById('position').value.trim();
+  const ageInput = document.getElementById('age').value.trim();
+
+  // Check for empty fields
+  if (!impressionsInput || !clicksInput || !positionInput || !ageInput) {
+    showWidgetError("All fields are required and must contain numeric values.");
+    return;
+  }
+
+  const impressions = parseFloat(impressionsInput);
+  const clicks = parseFloat(clicksInput);
+  const avgPosition = parseFloat(positionInput);
+  const contentAge = parseFloat(ageInput);
+
+  // Check for NaN
+  if (isNaN(impressions) || isNaN(clicks) || isNaN(avgPosition) || isNaN(contentAge)) {
+    showWidgetError("Invalid numeric input. Please check that all values are valid numbers.");
+    return;
+  }
+
+  // Value boundaries checks
+  if (impressions < 1) {
+    showWidgetError("Impressions must be a positive integer greater than or equal to 1.");
+    return;
+  }
+  if (clicks < 0) {
+    showWidgetError("Clicks cannot be negative.");
+    return;
+  }
+  if (clicks > impressions) {
+    showWidgetError(`Logical inconsistency: Clicks (${clicks}) cannot exceed Impressions (${impressions}).`);
+    return;
+  }
+  if (avgPosition < 1.0) {
+    showWidgetError("Average Position in Google Search Console must be greater than or equal to 1.0.");
+    return;
+  }
+  if (contentAge < 0) {
+    showWidgetError("Content Age in days cannot be negative.");
+    return;
+  }
 
   // 2. Perform Inference
   const result = runInference(impressions, clicks, avgPosition, contentAge);
 
   // 3. Update DOM
-  const resultContainer = document.getElementById('widget-result');
   const resultScore = document.getElementById('result-score');
   const resultBadge = document.getElementById('result-badge');
   const resultReason = document.getElementById('result-reason');
 
   // Remove hidden class
-  resultContainer.classList.remove('hidden');
+  if (resultContainer) resultContainer.classList.remove('hidden');
 
   // Update text values
-  resultScore.textContent = `${result.blendedScore}/100 (Probability: ${result.probPercent}%)`;
-  resultReason.textContent = result.reasoning;
+  if (resultScore) resultScore.textContent = `${result.blendedScore}/100 (Probability: ${result.probPercent}%)`;
+  if (resultReason) resultReason.textContent = result.reasoning;
 
   // Set action badge classes
-  resultBadge.className = 'badge';
-  if (result.action === 'refresh') {
-    resultBadge.classList.add('badge-refresh');
-    resultBadge.textContent = '🚨 Refresh';
-  } else if (result.action === 'monitor') {
-    resultBadge.classList.add('badge-leave');
-    resultBadge.textContent = '🛡️ Monitor';
-  } else {
-    resultBadge.classList.add('badge-monitor');
-    resultBadge.textContent = `🔍 ${result.action.replace('_', ' ').toUpperCase()}`;
+  if (resultBadge) {
+    resultBadge.className = 'badge';
+    if (result.action === 'refresh') {
+      resultBadge.classList.add('badge-refresh');
+      resultBadge.textContent = '🚨 Refresh';
+    } else if (result.action === 'monitor') {
+      resultBadge.classList.add('badge-leave');
+      resultBadge.textContent = '🛡️ Monitor';
+    } else {
+      resultBadge.classList.add('badge-monitor');
+      resultBadge.textContent = `🔍 ${result.action.replace('_', ' ').toUpperCase()}`;
+    }
   }
 }
 

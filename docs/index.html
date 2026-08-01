@@ -6,6 +6,20 @@
   <title>Content Refresh Opportunity Scoring: An Empirical ML Approach to Halting Search Traffic Decay</title>
   <meta name="description" content="A deployed research paper demonstrating content refresh opportunity scoring built on 79 million rows of real search data.">
   
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://saadali880.github.io/flyrank-ml-internship-saad/">
+  <meta property="og:title" content="Content Refresh Opportunity Scoring: An Empirical ML Approach">
+  <meta property="og:description" content="A deployed research paper demonstrating content refresh opportunity scoring built on 79 million rows of real search data.">
+  <meta property="og:image" content="https://saadali880.github.io/flyrank-ml-internship-saad/top_feature_importance.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://saadali880.github.io/flyrank-ml-internship-saad/">
+  <meta property="twitter:title" content="Content Refresh Opportunity Scoring: An Empirical ML Approach">
+  <meta property="twitter:description" content="A deployed research paper demonstrating content refresh opportunity scoring built on 79 million rows of real search data.">
+  <meta property="twitter:image" content="https://saadali880.github.io/flyrank-ml-internship-saad/top_feature_importance.png">
+  
   <!-- Preconnect Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -629,37 +643,74 @@
     const toggleText = themeToggleBtn.querySelector('.toggle-text');
     const toggleIcon = themeToggleBtn.querySelector('.toggle-icon');
 
-    themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      let newTheme = 'light';
-      
-      if (currentTheme === 'light') {
-        newTheme = 'dark';
+    // Apply persisted theme on load
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
         toggleText.textContent = 'Light Mode';
         toggleIcon.textContent = '☀️';
       } else {
         toggleText.textContent = 'Dark Mode';
         toggleIcon.textContent = '⚡';
       }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       
-      document.documentElement.setAttribute('data-theme', newTheme);
+      applyTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
       showToast(`Switched to ${newTheme} theme`);
     });
+
+    // Clipboard copy with fallback
+    function copyToClipboard(text, successMessage) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text)
+          .then(() => showToast(successMessage))
+          .catch(() => useFallbackCopy(text, successMessage));
+      } else {
+        useFallbackCopy(text, successMessage);
+      }
+    }
+
+    function useFallbackCopy(text, successMessage) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      textArea.style.top = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showToast(successMessage);
+        } else {
+          showToast("Failed to copy text");
+        }
+      } catch (err) {
+        console.error("Fallback copy failed", err);
+        showToast("Copy error: Please copy manually");
+      }
+      document.body.removeChild(textArea);
+    }
 
     // Copy status helper
     function copyStatus() {
       const textToCopy = "Model: Logistic Regression (L2)\nHoldout Precision@50: 74.0%\nBaseline Precision@50: 30.0%\nPrecision Lift: +247%\nHoldout ROC AUC: 0.747\nData Credit: https://flyrank.ai";
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        showToast("Status code copied to clipboard!");
-      });
+      copyToClipboard(textToCopy, "Status code copied to clipboard!");
     }
 
     // Copy metric helper
     function copyMetric(element, name) {
       const value = element.querySelector('.metric-value').textContent;
-      navigator.clipboard.writeText(`${name}: ${value}`).then(() => {
-        showToast(`Copied ${name} (${value})`);
-      });
+      copyToClipboard(`${name}: ${value}`, `Copied ${name} (${value})`);
     }
 
     // Toast notification helper
